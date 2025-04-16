@@ -1,0 +1,138 @@
+/* Spinner container */
+.spinner-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.7); /* Optional: Semi-transparent background */
+  }
+  .score-bar-container {
+    width: 100%;
+    background-color: #e0e0e0; /* Light gray background for the bar */
+    border-radius: 5px;
+    margin-bottom: 8px;
+}
+
+.score-bar {
+    height: 24px;
+    border-radius: 5px;
+    color: white;
+    text-align: center;
+    line-height: 24px; /* Center text vertically */
+    font-weight: bold;
+}
+
+.score-bar.communication-skills {
+    background-color: #1e90ff; /* Blue */
+}
+
+.score-bar.technical-skills {
+    background-color: #32cd32; /* Green */
+}
+
+.score-bar.teamwork {
+    background-color: #ffa500; /* Orange */
+}
+
+.score-bar.problem-solving {
+    background-color: #ff6347; /* Tomato */
+}
+
+.score-bar.punctuality {
+    background-color: #ff69b4; /* Hot pink */
+}
+
+.score-bar.overall-performance {
+    background-color: #9370db; /* Medium purple */
+}
+
+  
+  /* Spinner */
+  .spinner {
+    width: 3rem;
+    height: 3rem;
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    border-top: 4px solid #3498db;
+    animation: spin 1s linear infinite;
+  }
+  
+#loginBg{
+  background-image: url('./assets/background/b1.jpg'); /* Adjust the path */
+  background-size: contain; /* Or 'cover' */
+  background-position: center;
+  background-repeat: no-repeat;
+}
+  /* Spinner animation */
+  /* Keyframes for fade-in effect */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Keyframes for slide-in from left */
+@keyframes slideInLeft {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Keyframes for slide-in from right */
+@keyframes slideInRight {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Animation classes */
+.animate-fade-in {
+  animation: fadeIn 0.7s ease-in-out;
+}
+
+.slide-in-left {
+  animation: slideInLeft 0.5s ease-in-out forwards;
+}
+
+.slide-in-right {
+  animation: slideInRight 0.5s ease-in-out forwards;
+}
+
+/* Hover transition for sidebar links */
+.nav-item {
+  transition: all 0.3s ease;
+}
+
+.nav-item:hover {
+  transform: scale(1.05); /* Slight scaling effect on hover */
+}
+
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  /* Modal form scrollable */
+  .overflow-auto {
+    overflow: auto;
+  }
+  .score{
+    background-image:url('../../client/src/assets/award.png') ;
+   background-size: cover;
+  }

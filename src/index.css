@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@media print {
+    .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Ensure grid layout is maintained */
+        gap: 8px; /* Adjust gap if needed for print */
+        padding: 0; /* Remove padding for print */
+    }
+
+    .w-full {
+        width: 100%;
+    }
+
+    .mb-4 {
+        margin-bottom: 1rem; /* Ensure consistent margin for print */
+    }
+
+    .text-gray-600 {
+        color: #4a5568; /* Ensure text color is legible */
+    }
+
+    .relative, .absolute {
+        position: static; /* Adjust positioning for print if needed */
+    }
+
+    .bg-gray-200, .bg-green-500, .bg-blue-500, .bg-yellow-500, .bg-red-500, .bg-purple-500 {
+        background-color: inherit; /* Ensure background colors are maintained */
+    }
+
+    .rounded-full {
+        border-radius: 9999px; /* Ensure rounded corners are kept */
+    }
+
+    .text-white {
+        color: #ffffff; /* Ensure text color is readable */
+    }
+
+    .text-xs {
+        font-size: 12px; /* Adjust font size for readability in print */
+    }
+
+    .font-medium {
+        font-weight: 500; /* Ensure font weight consistency */
+    }
+
+    .flex {
+        display: flex; /* Maintain flexbox layout */
+    }
+
+    .items-center {
+        align-items: center; /* Maintain vertical alignment */
+    }
+
+    .justify-center {
+        justify-content: center; /* Maintain horizontal alignment */
+    }
+
+    .text-center {
+        text-align: center; /* Center align text */
+    }
+}
+@media print {
+    body {
+      margin: 0;
+      padding: 20px;
+      font-size: 12pt;
+    }
+  
+    .flex {
+      display: block !important;
+    }
+  
+    .bg-white {
+      background: #fff !important;
+    }
+  
+    .shadow-lg {
+      box-shadow: none !important;
+    }
+  
+    .rounded-lg {
+      border-radius: 0 !important;
+    }
+  
+    a,
+    button {
+      display: none; /* Hide links and buttons when printing */
+    }
+  }
+  
