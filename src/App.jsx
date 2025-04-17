@@ -40,7 +40,7 @@ import EditStudentScoreForm from './components/student/EditStudentScoreForm';
 import UserManagement from './components/LoginSystem/UserManagement';
 import LoginLogoutHistory from './components/LoginSystem/LoginLogoutHistory';
 import UserMessage from './components/LeavesModule/UserMessage';
-import EmployeeQualification from './components/employees/EmployeeQualification';
+// import EmployeeQualification from './components/employees/EmployeeQualification';
 import AddCertificateForm from './components/employees/AddCertificateForm';
 import EmployeeCertificates from './components/employees/EmployeeCertificates';
 import EmployeePerformance from './components/employees/EmployeePerformance';
