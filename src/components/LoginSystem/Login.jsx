@@ -72,6 +72,7 @@ function LoginForm() {
             Welcome to <span className="text-blue-600">Human Resource Management System</span>
           </h2>
           <p className="text-gray-600 mt-2">Manage staff efficiently and securely</p>
+          <p>{process.env.REACT_APP_BACKEND_URL}</p>
         </div>
 
         {/* Form Section */}
