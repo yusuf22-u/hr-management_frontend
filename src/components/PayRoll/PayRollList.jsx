@@ -20,11 +20,16 @@ const PayRollList = () => {
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_BACKEND_URL}/v1/payrolls/payroll_list`, {
             params: { limit, offset: (page - 1) * limit }
+        }, {
+            headers: {
+                'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
+                withCredentials: true
+            },
         })
             .then((res) => {
                 const { result, totalCount, totalNetSalary } = res.data;
                 setPayroll(result);
-               
+
                 setTotalNumPeople(totalCount);
                 setTotalSalary(Number(totalNetSalary.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })));
             })
@@ -36,7 +41,12 @@ const PayRollList = () => {
     const handleDelete = async (id) => {
         if (window.confirm('Are you sure you want to delete this PayRoll?')) {
             try {
-                await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/v1/payrolls/payroll_delete/${id}`);
+                await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/v1/payrolls/payroll_delete/${id}`, {
+                    headers: {
+                        'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
+                        withCredentials: true
+                    },
+                });
                 setPayroll(payroll.filter(pay => pay.payroll_id !== id));
             } catch (error) {
                 console.log('Error deleting payroll:', error);

@@ -9,7 +9,12 @@ const PayrollDetails = () => {
   useEffect(() => {
     const fetchPayroll = async () => {
       try {
-        const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/v1/payrolls/singlePayroll/${id}`);
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/v1/payrolls/singlePayroll/${id}`,{
+          headers: {
+            'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
+            withCredentials: true
+          },
+        });
         setPayroll(res.data);
       } catch (err) {
         console.error('Error fetching payroll data:', err);
@@ -24,7 +29,12 @@ const PayrollDetails = () => {
 
   const handleMarkAsPaid = async () => {
     try {
-      await axios.put(`http://localhost:4000/v1/payrolls/paySingle/${id}`);
+      await axios.put(`${process.env.REACT_APP_BACKEND_URL}/v1/payrolls/paySingle/${id}`,{
+        headers: {
+          'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
+          withCredentials: true
+        },
+      });
       alert('Salary marked as Paid!');
       setPayroll({ ...payroll, payment_status: 'Paid' });
     } catch (err) {

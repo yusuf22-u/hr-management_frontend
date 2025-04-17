@@ -69,7 +69,7 @@ const EmployeeList = () => {
     }
     const handleView = (employeeId) => {
         // setIsLoading(true);
-        axios.get(`http://localhost:4000/v1/employees/getSingleEmployee/${employeeId}`, {
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/v1/employees/getSingleEmployee/${employeeId}`, {
             headers: {
                 'Authorization': `Bearer ${sessionStorage.getItem('token')}`
             }
