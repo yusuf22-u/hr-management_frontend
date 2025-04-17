@@ -59,7 +59,9 @@ function SignUp() {
 
       try {
         const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/v1/signUp`, formData, {
-          headers: { 'Content-Type': 'multipart/form-data' },
+          headers: { 'Content-Type': 'multipart/form-data',
+            withCredentials: true,
+           },
         });
         console.log(res);
         navigate('/login');
