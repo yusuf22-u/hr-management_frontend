@@ -33,7 +33,9 @@ function LoginForm() {
       setError("");
 
       try {
-        const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/v1/login`, values);
+        const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/v1/login`, values,{
+          withCredentials: true,
+        });
         const token = response.data.token;
         const decodedToken = jwtDecode(token);
 
