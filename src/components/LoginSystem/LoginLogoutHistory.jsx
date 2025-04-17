@@ -11,7 +11,7 @@ const LoginLogoutHistory = () => {
   useEffect(() => {
     const fetchHistory = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/v1/user/history`, {
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/v1/user/history`, {
           headers: {
             'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
           },
@@ -55,7 +55,7 @@ const LoginLogoutHistory = () => {
               <tr key={index} className="hover:bg-gray-100">
                 <td className="px-4 py-2 border">
                   <img
-                    src={`http://localhost:4000/uploads/userpic/${record.profile}`}
+                    src={`${process.env.REACT_APP_BACKEND_URL}/uploads/userpic/${record.profile}`}
                     alt={`${record.username} profile`}
                     className="w-10 h-10 rounded-full"
                   />

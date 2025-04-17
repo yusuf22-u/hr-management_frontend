@@ -12,7 +12,7 @@ const EditEmployee = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    axios.get(`http://localhost:4000/v1/employees/getSingleEmployee/${id}`, {
+    axios.get(`${process.env.REACT_APP_BACKEND_URL}/v1/employees/getSingleEmployee/${id}`, {
       headers: {
         'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
       }
@@ -79,7 +79,7 @@ const EditEmployee = () => {
         }
       });
       try {
-        await axios.put(`http://localhost:4000/v1/employees/updateEmployee/${id}`, formData, {
+        await axios.put(`${process.env.REACT_APP_BACKEND_URL}/v1/employees/updateEmployee/${id}`, formData, {
           headers: {
             'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
             'Content-Type': 'multipart/form-data',

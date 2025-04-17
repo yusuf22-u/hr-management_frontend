@@ -58,7 +58,7 @@ function SignUp() {
       }
 
       try {
-        const res = await axios.post('http://localhost:4000/v1/signUp', formData, {
+        const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/v1/signUp`, formData, {
           headers: { 'Content-Type': 'multipart/form-data' },
         });
         console.log(res);

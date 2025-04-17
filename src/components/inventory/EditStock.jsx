@@ -12,7 +12,7 @@ const EditStock = () => {
 
     // Fetch item data when the component mounts
     useEffect(() => {
-        axios.get(`http://localhost:4000/v1/stocks/single_items/${id}`)
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/v1/stocks/single_items/${id}`)
             .then(response => {
                 const { item_id, transactions_type, quantity } = response.data;
                 setItems({
@@ -50,7 +50,7 @@ const EditStock = () => {
             onSubmit={async (values, { setSubmitting }) => {
                 try {
 
-                    const response = await axios.put(`http://localhost:4000/v1/stocks/update_items/${id}`, values);
+                    const response = await axios.put(`${process.env.REACT_APP_BACKEND_URL}/v1/stocks/update_items/${id}`, values);
 
                     navigate('/dashboard/stocks/stock_list');
                 } catch (error) {

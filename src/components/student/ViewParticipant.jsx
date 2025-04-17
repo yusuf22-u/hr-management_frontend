@@ -9,7 +9,7 @@ const ViewParticipant = () => {
     const itemsPerPage = 1;
 
     useEffect(() => {
-        axios.get('http://localhost:4000/v1/participant/viewParticipant',{
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/v1/participant/viewParticipant`,{
             headers:{
                 'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
             }
@@ -90,7 +90,7 @@ const ViewParticipant = () => {
                     <hr className='px-3' />
                     <div className="profile flex items-center mb-6 space-x-8">
                         <img
-                            src={`http://localhost:4000/uploads/student/${evals.profile_pic}`}
+                            src={`${process.env.REACT_APP_BACKEND_URL}/uploads/student/${evals.profile_pic}`}
                             alt={evals.full_name}
                             className="w-32 h-32 object-cover mt-4 rounded-full border-4 border-gray-100 mr-6"
                         />

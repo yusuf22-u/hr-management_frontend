@@ -19,7 +19,7 @@ const LeaveRequestForm = () => {
 
   useEffect(() => {
     // Initialize Socket.io client
-    const socketInstance = io('http://localhost:4000'); // Replace with your server URL
+    const socketInstance = io(`${process.env.REACT_APP_BACKEND_URL}`); // Replace with your server URL
     setSocket(socketInstance);
 
     // Listen for leave request updates
@@ -51,7 +51,7 @@ const LeaveRequestForm = () => {
     };
 
     try {
-      const response = await axios.post('http://localhost:4000/v1/leaves/create', leaveData, {
+      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/v1/leaves/create`, leaveData, {
         headers: {
           'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
         },

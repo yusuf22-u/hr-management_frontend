@@ -23,7 +23,7 @@ const EvaluationGraph = () => {
     useEffect(() => {
         const fetchingData = async () => {
             try {
-                const res = await axios.get(`http://localhost:4000/v1/evaluations/rates/${id}`,{
+                const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/v1/evaluations/rates/${id}`,{
                     headers: {
                         'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
                     }
@@ -126,7 +126,7 @@ const EvaluationGraph = () => {
             <div className="flex lg:ml-8 flex-col lg:items-center items-center space-y-1 lg:justify-center sm:items-start text-center sm:text-left">
                 <h1 className="text-gray-600 text-xl sm:text-2xl font-semibold capitalize">Employee</h1>
                 <img
-                    src={`http://localhost:4000/uploads/profile/${data.profile_pic}`}
+                    src={`${process.env.REACT_APP_BACKEND_URL}/uploads/profile/${data.profile_pic}`}
                     alt="Employee"
                     className="w-32 sm:w-40 h-32 sm:h-40 rounded-full border-4  shadow-lg mb-4"
                 />

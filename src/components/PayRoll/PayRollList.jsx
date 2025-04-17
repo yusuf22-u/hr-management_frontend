@@ -18,7 +18,7 @@ const PayRollList = () => {
 
     // Fetch payroll data
     useEffect(() => {
-        axios.get(`http://localhost:4000/v1/payrolls/payroll_list`, {
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/v1/payrolls/payroll_list`, {
             params: { limit, offset: (page - 1) * limit }
         })
             .then((res) => {
@@ -36,7 +36,7 @@ const PayRollList = () => {
     const handleDelete = async (id) => {
         if (window.confirm('Are you sure you want to delete this PayRoll?')) {
             try {
-                await axios.delete(`http://localhost:4000/v1/payrolls/payroll_delete/${id}`);
+                await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/v1/payrolls/payroll_delete/${id}`);
                 setPayroll(payroll.filter(pay => pay.payroll_id !== id));
             } catch (error) {
                 console.log('Error deleting payroll:', error);
@@ -156,7 +156,7 @@ const PayRollList = () => {
                         {filteredPayroll.map((pay, index) => (
                             <tr key={index} className={`hover:bg-gray-100 ${index % 2 === 0 ? 'bg-gray-50' : ''}`}>
                                 <td className="px-4 py-2">
-                                    {pay.profile_pic ? <img src={`http://localhost:4000/uploads/profile/${pay.profile_pic}`} alt={pay.full_name} className="w-12 h-12 object-cover rounded-full" /> : 'No Image'}
+                                    {pay.profile_pic ? <img src={`${process.env.REACT_APP_BACKEND_URL}/uploads/profile/${pay.profile_pic}`} alt={pay.full_name} className="w-12 h-12 object-cover rounded-full" /> : 'No Image'}
                                 </td>
                                 <td className="px-4 py-2">{pay.full_name}</td>
                                 <td className="px-4 py-2">D{Number(pay.basic_salary).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>

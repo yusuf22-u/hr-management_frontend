@@ -16,7 +16,7 @@ const UserMessage = () => {
     const fetchNotifications = async () => {
       try {
         const token = sessionStorage.getItem("token");
-        const response = await axios.get("http://localhost:4000/v1/leaves/inbox", {
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/v1/leaves/inbox`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setNotifications(response.data);
@@ -32,7 +32,7 @@ const UserMessage = () => {
   const handleMarkAsRead = async (id) => {
     try {
       await axios.put(
-        `http://localhost:4000/v1/leaves/markUserAsRead/${id}`,
+        `${process.env.REACT_APP_BACKEND_URL}/v1/leaves/markUserAsRead/${id}`,
         {},
         {
           headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` },
@@ -56,7 +56,7 @@ const UserMessage = () => {
   useEffect(() => {
     const fetchUserNotification = async () => {
       try {
-        const res = await axios.get("http://localhost:4000/v1/leaves/notify", {
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/v1/leaves/notify`, {
           headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` },
         });
         setNewMessageCount(res.data.length);
@@ -70,7 +70,7 @@ const UserMessage = () => {
   const handleDelete = async () => {
     if (!deleteId) return;
     try {
-      const res = await axios.delete(`http://localhost:4000/v1/leaves/deleteMessage/${deleteId}`, {
+      const res = await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/v1/leaves/deleteMessage/${deleteId}`, {
         headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` },
       });
 

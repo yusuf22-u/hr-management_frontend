@@ -68,7 +68,7 @@ const UserManagement = () => {
     const handleUpdateRole = async () => {
         try {
             await axios.put(
-                `http://localhost:4000/v1/update_users/role/${selectedUser.id}`,  {role: newRole},
+                `${process.env.REACT_APP_BACKEND_URL}/v1/update_users/role/${selectedUser.id}`,  {role: newRole},
                 {
                   
                     headers: {
@@ -155,7 +155,7 @@ const UserManagement = () => {
                                     <td className="p-4 text-center align-middle">
                                         {user.profile ? (
                                             <img
-                                                src={`http://localhost:4000/uploads/userpic/${user.profile}`}
+                                                src={`${process.env.REACT_APP_BACKEND_URL}/uploads/userpic/${user.profile}`}
                                                 alt={user.username}
                                                 className="w-12 h-12 object-cover rounded-full mx-auto"
                                             />

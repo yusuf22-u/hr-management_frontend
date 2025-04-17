@@ -18,7 +18,7 @@ const EmployeeDistributionChart = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:4000/v1/employees/distribution',{
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/v1/employees/distribution`,{
             headers: {
                 'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
               },

@@ -24,7 +24,7 @@ const AddCertificateForm = ({ employeeId }) => {
         }
 
         try {
-            const res = await axios.post("http://localhost:4000/v1/certificates/addCertificates", formData, {
+            const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/v1/certificates/addCertificates`, formData, {
                 headers: { "Content-Type": "multipart/form-data" },
             });
             toast.success(res.data.message)

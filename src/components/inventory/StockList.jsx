@@ -24,7 +24,7 @@ const StockList = () => {
 
     const fetchStockList = async () => {
         try {
-            const response = await axios.get('http://localhost:4000/v1/stocks/stock_list');
+            const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/v1/stocks/stock_list`);
             const { result, totalStock_In, totalStock_Out } = response.data;
             setStocks(result);
             setStock_In(totalStock_In)
@@ -51,7 +51,7 @@ const StockList = () => {
     const handleDelete = async (id) => {
         if (window.confirm('Are you sure you want to delete this stock?')) {
             try {
-                await axios.delete(`http://localhost:4000/v1/stocks/delete_stock/${id}`);
+                await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/v1/stocks/delete_stock/${id}`);
                 setStocks(stocks.filter(stock => stock.id !== id));
             } catch (error) {
                 setError('Failed to delete the stock.');
@@ -134,7 +134,7 @@ const StockList = () => {
                                 <td className="py-3 px-4">{stock.item_name}</td>
                                 <td className="py-3 px-4">
                                     <img
-                                        src={`http://localhost:4000/uploads/items/${stock.item_image_url}`}
+                                        src={`${process.env.REACT_APP_BACKEND_URL}/uploads/items/${stock.item_image_url}`}
                                         alt={stock.name}
                                         className="w-16 h-16 object-cover rounded-lg"
                                     />

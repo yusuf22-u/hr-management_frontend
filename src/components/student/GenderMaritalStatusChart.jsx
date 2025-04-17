@@ -10,7 +10,7 @@ const GenderMaritalStatusChart = () => {
     useEffect(() => {
         const fetchGenderAndMaritalStatusCounts = async () => {
             try {
-                const response = await axios.get('http://localhost:4000/v1/student/genderMaritalStatusCounts', {
+                const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/v1/student/genderMaritalStatusCounts`, {
                     headers: {
                         'Authorization': `Bearer ${sessionStorage.getItem('token')}`
                     }

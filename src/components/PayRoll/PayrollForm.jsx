@@ -32,7 +32,7 @@ const PayrollForm = ({ onClose }) => {
     validationSchema,
     onSubmit: async (values) => {
       try {
-        await axios.post('http://localhost:4000/v1/payrolls/addPayroll', values);
+        await axios.post(`${process.env.REACT_APP_BACKEND_URL}/v1/payrolls/addPayroll`, values);
         onClose();
         setServerError('');
         setMessage('Payroll added successfully');
@@ -48,7 +48,7 @@ const PayrollForm = ({ onClose }) => {
   // Fetch employee position when employee_id changes
   useEffect(() => {
     if (formik.values.employee_id) {
-      axios.get(`http://localhost:4000/v1/employees/getSingleEmployee/${formik.values.employee_id}`,{
+      axios.get(`${process.env.REACT_APP_BACKEND_URL}/v1/employees/getSingleEmployee/${formik.values.employee_id}`,{
         headers: {
           'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
         },

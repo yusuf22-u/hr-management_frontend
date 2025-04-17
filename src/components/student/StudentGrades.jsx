@@ -29,7 +29,7 @@ const StudentGrades = () => {
     useEffect(() => {
         const fetchStudents = async () => {
             try {
-                const response = await axios.get('http://localhost:4000/v1/score/grade-list');
+                const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/v1/score/grade-list`);
                 setStudents(response.data);
                 setLoading(false);
             } catch (err) {
@@ -43,7 +43,7 @@ const StudentGrades = () => {
     const handleDelete = async (id) => {
         if (window.confirm('Are you sure you want to delete this record?')) {
             try {
-                await axios.delete(`http://localhost:4000/v1/score/delete/${id}`);
+                await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/v1/score/delete/${id}`);
                 setStudents(students.filter(student => student.id !== id));
             } catch (err) {
                 setError('Failed to delete the record');
@@ -144,7 +144,7 @@ const StudentGrades = () => {
                                 <tr key={student.id} className="border-t">
                                     <td className="px-4 py-2">
                                         <img
-                                            src={`http://localhost:4000/uploads/student/${student.profile_pic}`}
+                                            src={`${process.env.REACT_APP_BACKEND_URL}/uploads/student/${student.profile_pic}`}
                                             alt={`${student.student_name}'s profile`}
                                             className="w-10 h-10 rounded-full"
                                         />

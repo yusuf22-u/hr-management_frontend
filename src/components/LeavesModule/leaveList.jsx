@@ -8,7 +8,7 @@ const LeaveList = () => {
   useEffect(() => {
     const fetchLeaveRequests = async () => {
       try {
-        const res = await axios.get('http://localhost:4000/v1/leaves/leave-requests',{
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/v1/leaves/leave-requests`,{
           headers:{
             'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
           }
@@ -28,7 +28,7 @@ const LeaveList = () => {
   
   const handleStatusUpdate = async (id, status) => {
     try {
-      await axios.put(`http://localhost:4000/v1/leaves/update/${id}`, 
+      await axios.put(`${process.env.REACT_APP_BACKEND_URL}/v1/leaves/update/${id}`, 
         { status }, // Send status in the body
         {
           headers: {

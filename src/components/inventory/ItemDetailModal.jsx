@@ -12,7 +12,7 @@ const ItemDetailModal = () => {
   useEffect(() => {
     const fetchItemDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/v1/stocks/single_items/${id}`);
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/v1/stocks/single_items/${id}`);
         setItem(response.data);
       } catch (error) {
         setError('Failed to fetch item details.');
@@ -40,7 +40,7 @@ const ItemDetailModal = () => {
         <body>
           <div class="print-container">
             <div class="item-header">
-              <img src="http://localhost:4000/uploads/items/${item.item_pic}" alt="${item.item_name}" />
+              <img src="${process.env.REACT_APP_BACKEND_URL}/uploads/items/${item.item_pic}" alt="${item.item_name}" />
               <h2>${item.item_name}</h2>
             </div>
             <div class="item-details">
@@ -81,7 +81,7 @@ const ItemDetailModal = () => {
         <div className="py-4 px-2 w-full mx-auto">
           <div className="header w-full text-center">
             <img
-              src={`http://localhost:4000/uploads/items/${item.item_pic}`}
+              src={`${process.env.REACT_APP_BACKEND_URL}/uploads/items/${item.item_pic}`}
               alt={item.name}
               className="w-32 h-32  mx-auto mb-4 "
             />

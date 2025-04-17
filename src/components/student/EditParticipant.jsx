@@ -58,7 +58,7 @@ const EditParticipant = () => {
         }),
         onSubmit: async (values) => {
             try {
-                const res = await axios.put(`http://localhost:4000/v1/center/update/${id}`, values, {
+                const res = await axios.put(`${process.env.REACT_APP_BACKEND_URL}/v1/center/update/${id}`, values, {
                     headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` }
                 });
                 toast.success(res.data.message);
@@ -142,7 +142,7 @@ const EditParticipant = () => {
     <select 
         className="border border-gray-700 w-full p-2 rounded bg-white" 
         name="region" 
-        value={formik.values.region}  // ✅ Uses fetched value
+        value={formik.values.region}  
         onChange={formik.handleChange}
     >
         <option value="Region One">Region One</option>

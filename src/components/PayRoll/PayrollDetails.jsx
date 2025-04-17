@@ -9,7 +9,7 @@ const PayrollDetails = () => {
   useEffect(() => {
     const fetchPayroll = async () => {
       try {
-        const res = await axios.get(`http://localhost:4000/v1/payrolls/singlePayroll/${id}`);
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/v1/payrolls/singlePayroll/${id}`);
         setPayroll(res.data);
       } catch (err) {
         console.error('Error fetching payroll data:', err);

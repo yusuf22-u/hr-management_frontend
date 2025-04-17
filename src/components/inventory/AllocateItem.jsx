@@ -23,7 +23,7 @@ const AllocateItemForm = () => {
     setServerError('');
 
     try {
-      const response = await axios.post('http://localhost:4000/v1/allocateItem/allocate', values);
+      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/v1/allocateItem/allocate`, values);
       console.log(response.data);
       navigate('/dashboard/items/list');
     } catch (error) {

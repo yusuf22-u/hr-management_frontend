@@ -15,7 +15,7 @@ const EmployeeDetail = ({ employee, isOpen, onClose }) => {
                 <h2 className="text-xl font-bold mb-2 text-center text-gray-800">Employee Details</h2>
                 <div className="flex justify-center mb-4">
                     {employee.profile_pic ? (
-                        <img src={`http://localhost:4000/uploads/profile/${employee.profile_pic}`} alt={employee.full_name} className="w-24 h-24 object-cover rounded-full" />
+                        <img src={`${process.env.REACT_APP_BACKEND_URL}/uploads/profile/${employee.profile_pic}`} alt={employee.full_name} className="w-24 h-24 object-cover rounded-full" />
                     ) : (
                         <div className="w-24 h-24 bg-gray-200 rounded-full flex items-center justify-center">
                             No Image

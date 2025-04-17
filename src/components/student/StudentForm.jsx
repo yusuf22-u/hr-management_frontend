@@ -92,7 +92,7 @@ const StudentForm = () => {
     formData.append('center', values.center); // Add center
 
     try {
-      const response = await axios.post('http://localhost:4000/v1/student/createStudent', formData, {
+      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/v1/student/createStudent`, formData, {
         headers: {
           'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
           'Content-Type': 'multipart/form-data'

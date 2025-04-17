@@ -37,7 +37,7 @@ const StudentDashboard = () => {
     const userRole = sessionStorage.getItem('role');
 
     useEffect(() => {
-        axios.get('http://localhost:4000/v1/student/allStudents', {
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/v1/student/allStudents`, {
             headers: {
                 'Authorization': `Bearer ${sessionStorage.getItem('token')}`
             }

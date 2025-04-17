@@ -19,11 +19,11 @@ const EmployeeList = () => {
 
     useEffect(() => {
         setIsLoading(true);
-        axios.get(`http://localhost:4000/v1/employees/getEmployee?page=${currentPage}&limit=${itemsPerPage}`)
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/v1/employees/getEmployee?page=${currentPage}&limit=${itemsPerPage}`)
             .then(response => {
                 const employeesWithProfilePic = response.data.employees.map(employee => ({
                     ...employee,
-                    profile_pic: employee.profile_pic ? `http://localhost:4000/uploads/profile/${employee.profile_pic}` : null
+                    profile_pic: employee.profile_pic ? `${process.env.REACT_APP_BACKEND_URL}/uploads/profile/${employee.profile_pic}` : null
                 }));
                 setEmployees(employeesWithProfilePic);
                 setFilteredEmployees(employeesWithProfilePic); // Populate filteredEmployees as well
@@ -42,7 +42,7 @@ const EmployeeList = () => {
     };
 
     const handleDelete = async (id) => {
-        await axios.delete(`http://localhost:4000/v1/employees/deleteEmployee/${id}`, {
+        await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/v1/employees/deleteEmployee/${id}`, {
             headers: {
                 'Authorization': `Bearer ${sessionStorage.getItem('token')}`
             }

@@ -6,7 +6,7 @@ import logo1 from '../../assets/logo1.png'
 const EmployeeCertificate = () => {
     const [staff, setStaff] = useState();
     useEffect(() => {
-        axios.get("http://localhost:4000/v1/evaluations/staffOfTheMonth",{
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/v1/evaluations/staffOfTheMonth`,{
             headers: {
                 'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
             }
@@ -128,7 +128,7 @@ const EmployeeCertificate = () => {
                 {/* Employee Image */}
                 <div className="flex justify-center mt-8 mb-6">
                     <img
-                        src={`http://localhost:4000/uploads/profile/${staff?.profile_pic}`}
+                        src={`${process.env.REACT_APP_BACKEND_URL}/uploads/profile/${staff?.profile_pic}`}
                         alt="Employee"
                         className="w-32 sm:w-40 h-32 sm:h-40 rounded-full border-4 border-yellow-500 shadow-md"
                     />

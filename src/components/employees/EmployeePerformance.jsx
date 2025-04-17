@@ -18,7 +18,7 @@ const EmployeePerformance = () => {
 
     // Fetch evaluations
     useEffect(() => {
-        axios.get('http://localhost:4000/v1/evaluations/view', {
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/v1/evaluations/view`, {
             headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` }
         })
             .then(response => {
@@ -31,7 +31,7 @@ const EmployeePerformance = () => {
 
     // Fetch Staff of the Month
     useEffect(() => {
-        axios.get("http://localhost:4000/v1/evaluations/staffOfTheMonth",{
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/v1/evaluations/staffOfTheMonth`,{
             headers: {
                 'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
             }
@@ -66,7 +66,7 @@ const EmployeePerformance = () => {
     const handlePageChange = (page) => {
         setCurrentPage(page);
     };
-console.log('eval',evaluations)
+// console.log('eval',evaluations)
     return (
         <div className="p-6 bg-white shadow-md rounded-lg overflow-hidden">
             {/* Header Section */}
@@ -84,7 +84,7 @@ console.log('eval',evaluations)
                     <h1 className='text-blue-600 capitalize text-lg'>Employee of the Month</h1>
                     <Link to={'/dashboard/employee/StaffOfMonth/'}>
                         <img
-                            src={`http://localhost:4000/uploads/profile/${staff?.profile_pic}`}
+                            src={`${process.env.REACT_APP_BACKEND_URL}/uploads/profile/${staff?.profile_pic}`}
                             alt="Employee"
                             className="w-32 sm:w-40 h-32 sm:h-40 rounded-full border-blue-500 shadow-md"
                         />
@@ -134,7 +134,7 @@ console.log('eval',evaluations)
                                 <tr key={index} className={`hover:bg-gray-100 transition ${index % 2 === 0 ? 'bg-gray-50' : ''}`}>
                                     <td className="px-4 py-3">
                                         <img
-                                            src={`http://localhost:4000/uploads/profile/${evals.profile_pic}`}
+                                            src={`${process.env.REACT_APP_BACKEND_URL}/uploads/profile/${evals.profile_pic}`}
                                             alt={evals.full_name}
                                             className="w-12 h-12 object-cover rounded-full border-2 border-gray-300"
                                         />

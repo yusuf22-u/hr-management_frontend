@@ -14,7 +14,7 @@ const StudentReport = () => {
     useEffect(() => {
         const fetchStudentData = async () => {
             try {
-                const response = await axios.get(`http://localhost:4000/v1/student/getStudent/${id}`, {
+                const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/v1/student/getStudent/${id}`, {
                     headers: {
                         'Authorization': `Bearer ${sessionStorage.getItem('token')}`
                     }
@@ -99,7 +99,7 @@ const StudentReport = () => {
 
                 <div className="flex flex-col md:flex-row items-center justify-center mx-auto md:space-x-8">
                     <img
-                        src={`http://localhost:4000/uploads/student/${student.profile_pic}`}
+                        src={`${process.env.REACT_APP_BACKEND_URL}/uploads/student/${student.profile_pic}`}
                         alt="Profile"
                         className="w-28 h-32 profile-img   object-cover"
                     />

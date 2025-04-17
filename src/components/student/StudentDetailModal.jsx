@@ -15,7 +15,7 @@ const StudentDetailModal = ({ student, isOpen, onClose }) => {
                 <h2 className="text-xl font-bold mb-2 text-center text-gray-800">Student Details</h2>
                 <div className="flex justify-center mb-4">
                     {student.profile_pic ? (
-                        <img src={`http://localhost:4000/uploads/student/${student.profile_pic}`} alt={student.full_name} className="w-24 h-24 object-cover rounded-full" />
+                        <img src={`${process.env.REACT_APP_BACKEND_URL}/uploads/student/${student.profile_pic}`} alt={student.full_name} className="w-24 h-24 object-cover rounded-full" />
                     ) : (
                         <div className="w-24 h-24 bg-gray-200 rounded-full flex items-center justify-center">
                             No Image

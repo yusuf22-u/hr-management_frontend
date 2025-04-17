@@ -23,7 +23,7 @@ const StockForm = ({onClose}) => {
         setServerError('');
 
         try {
-            const response = await axios.post('http://localhost:4000/v1/stocks/create_stock', values);
+            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/v1/stocks/create_stock`, values);
             onClose()
              navigate('/dashboard/stocks/stock_list');
             

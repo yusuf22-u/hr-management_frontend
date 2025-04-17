@@ -11,7 +11,7 @@ const ParticapantDetail = () => {
     useEffect(() => {
         const fetchParticipant = async () => {
             try {
-                const res = await axios.get(`http://localhost:4000/v1/center/${id}`, {
+                const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/v1/center/${id}`, {
                     headers: {
                         'Authorization': `Bearer ${sessionStorage.getItem('token')}`
                     }

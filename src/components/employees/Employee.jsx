@@ -39,7 +39,7 @@ const EmployeeForm = () => {
       for (let key in values) {
         formData.append(key, values[key]);
       }
-      axios.post('http://localhost:4000/v1/employees/createEmployee', formData, {
+      axios.post(`${process.env.REACT_APP_BACKEND_URL}/v1/employees/createEmployee`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }

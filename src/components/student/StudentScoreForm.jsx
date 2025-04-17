@@ -44,7 +44,7 @@ const StudentScoreForm = () => {
 
     const handleSubmit = async (values, { resetForm, setFieldError }) => {
         try {
-            const response = await axios.post('http://localhost:4000/v1/score/add-student-score', values);
+            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/v1/score/add-student-score`, values);
 
             if (response.status === 201) {
                 toast.success('Student scores submitted successfully!');

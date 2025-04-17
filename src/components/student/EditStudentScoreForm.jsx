@@ -18,7 +18,7 @@ const EditStudentScoreForm = () => {
         // Fetch existing data for the student based on student_matNo
         const fetchStudentData = async () => {
             try {
-                const response = await axios.get(`http://localhost:4000/v1/score/get_student/${id}`);
+                const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/v1/score/get_student/${id}`);
                 setStudentData(response.data);
                 setLevelOfEntry(response.data.level_of_entry);
             } catch (error) {
@@ -53,7 +53,7 @@ const EditStudentScoreForm = () => {
 
     const handleSubmit = async (values, { setFieldError }) => {
         try {
-            const response = await axios.put(`http://localhost:4000/v1/score/updateStudentScore/${id}`, values);
+            const response = await axios.put(`${process.env.REACT_APP_BACKEND_URL}/v1/score/updateStudentScore/${id}`, values);
 
             if (response.status === 200) {
                 toast.success('Student scores updated successfully!');

@@ -14,9 +14,9 @@ const AllocationCards = () => {
     useEffect(() => {
         const fetchAllocations = async () => {
             try {
-                const response = await axios.get('http://localhost:4000/v1/allocateItem/assign_list');
+                const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/v1/allocateItem/assign_list`);
                 setAllocations(response.data.data); // Adjust according to the response structure
-                console.log('allow', response.data.data)
+                // console.log('allow', response.data.data)
                 setLoading(false);
             } catch (err) {
                 setError('Error fetching allocation data');
@@ -29,7 +29,7 @@ const AllocationCards = () => {
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`http://localhost:4000/v1/allocateItem/delete_allocation/${id}`); // Adjust endpoint
+            await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/v1/allocateItem/delete_allocation/${id}`); // Adjust endpoint
             setAllocations(allocations.filter(allocation => allocation.id !== id));
         } catch (err) {
             setError('Error deleting allocation');
@@ -39,7 +39,7 @@ const AllocationCards = () => {
 
 
     const handleReturn = async (id) => {
-        await axios.put(`http://localhost:4000/v1/allocateItem/return/${id}`); // Your API call
+        await axios.put(`${process.env.REACT_APP_BACKEND_URL}/v1/allocateItem/return/${id}`); // Your API call
         setAllocations(prev =>
             prev.map(allocation =>
                 allocation.id === id ? { ...allocation, returned_at: new Date(), is_returned: true } : allocation

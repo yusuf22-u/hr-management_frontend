@@ -12,7 +12,7 @@ const StudentSearchAndPrint = () => {
         e.preventDefault();
     
         try {
-          const response = await axios.post('http://localhost:4000/v1/student/search', {
+          const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/v1/student/search`, {
             levelOfEntry,
             year,
           });

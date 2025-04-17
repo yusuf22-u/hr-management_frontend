@@ -48,7 +48,7 @@ const navigate=useNavigate()
     //handle delete
     const handleDelete = async (id) => {
         try {
-            const res = await axios.delete(`http://localhost:4000/v1/center/${id}`, {
+            const res = await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/v1/center/${id}`, {
                 headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` }
             });
 
@@ -128,7 +128,7 @@ const navigate=useNavigate()
                                 <tr key={index} className={`hover:bg-gray-100 transition-all ${index % 2 === 0 ? 'bg-gray-50' : ''}`}>
                                     <Link to={`/dashboard/participant/${student.studentId}`}>
                                         <td className="px-4 py-3">
-                                            <img src={`http://localhost:4000/uploads/student/${student.profile_pic}`} alt={student.full_name} className="w-12 h-12 object-cover rounded-full" />
+                                            <img src={`${process.env.REACT_APP_BACKEND_URL}/uploads/student/${student.profile_pic}`} alt={student.full_name} className="w-12 h-12 object-cover rounded-full" />
                                         </td>
                                     </Link>
 

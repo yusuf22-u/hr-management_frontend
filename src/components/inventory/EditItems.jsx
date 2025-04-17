@@ -12,7 +12,7 @@ const EditItems = () => {
 
     // Fetch item data when the component mounts
     useEffect(() => {
-        axios.get(`http://localhost:4000/v1/items/getItem/${id}`)
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/v1/items/getItem/${id}`)
             .then(response => {
                 const { name, category, quantity, description, image_url } = response.data;
                 setItems({
@@ -67,7 +67,7 @@ const EditItems = () => {
                         }
                     });
 
-                    await axios.put(`http://localhost:4000/v1/items//update_item/${id}`, formData, {
+                    await axios.put(`${process.env.REACT_APP_BACKEND_URL}/v1/items//update_item/${id}`, formData, {
                         headers: {
                             'Content-Type': 'multipart/form-data',
                         },

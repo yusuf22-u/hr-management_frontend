@@ -15,7 +15,7 @@ const EditStudentForm = () => {
   useEffect(() => {
     const fetchStudentData = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/v1/student/getStudent/${id}`, {
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/v1/student/getStudent/${id}`, {
           headers: {
             'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
           },
@@ -53,7 +53,7 @@ const EditStudentForm = () => {
     formData.append('center', values.center);
 
     try {
-      const response = await axios.put(`http://localhost:4000/v1/student/updateStudent`, formData, {
+      const response = await axios.put(`${process.env.REACT_APP_BACKEND_URL}/v1/student/updateStudent`, formData, {
         headers: {
           'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
           'Content-Type': 'multipart/form-data',

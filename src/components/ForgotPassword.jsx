@@ -24,7 +24,7 @@ export const ForgotPassword = () => {
         validationSchema: validationSchema,
         onSubmit: async (values) => {
             try {
-                const res = await axios.post('http://localhost:4000/v1/forgotPassword', values);
+                const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/v1/forgotPassword`, values);
                 console.log(res);
                 navigate('/login'); // Or any other route you want to redirect to
             } catch (err) {

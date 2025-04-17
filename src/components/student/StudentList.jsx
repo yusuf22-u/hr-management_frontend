@@ -29,7 +29,7 @@ const StudentList = () => {
 
     useEffect(() => {
         setIsLoading(true);
-        axios.get(`http://localhost:4000/v1/student/allStudents?page=${currentPage}&limit=${itemsPerPage}`, {
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/v1/student/allStudents?page=${currentPage}&limit=${itemsPerPage}`, {
             headers: {
                 'Authorization': `Bearer ${sessionStorage.getItem('token')}`
             }
@@ -37,7 +37,7 @@ const StudentList = () => {
             .then(response => {
                 const studentWithProfilePic = response.data.students.map(student => ({
                     ...student,
-                    profile_pic: student.profile_pic ? `http://localhost:4000/uploads/student/${student.profile_pic}` : null
+                    profile_pic: student.profile_pic ? `${process.env.REACT_APP_BACKEND_URL}/uploads/student/${student.profile_pic}` : null
                 }));
                 setStudents(studentWithProfilePic);
                 setFilteredStudents(studentWithProfilePic);
@@ -62,7 +62,7 @@ const StudentList = () => {
 
     const handleDelete = async (id) => {
         try {
-            const result = await axios.delete(`http://localhost:4000/v1/student/delete_Student/${id}`, {
+            const result = await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/v1/student/delete_Student/${id}`, {
                 headers: {
                     'Authorization': `Bearer ${sessionStorage.getItem('token')}`
                 }
@@ -96,7 +96,7 @@ const StudentList = () => {
 
     const handleView = (studentId) => {
         setIsLoading(true);
-        axios.get(`http://localhost:4000/v1/student/getStudent/${studentId}`, {
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/v1/student/getStudent/${studentId}`, {
             headers: {
                 'Authorization': `Bearer ${sessionStorage.getItem('token')}`
             }

@@ -13,7 +13,7 @@ const Dashboard = () => {
   const token = sessionStorage.getItem('token');
   const username = sessionStorage.getItem('username');
   const profilePic = sessionStorage.getItem('profilePic');
-  const profilePicUrl = `http://localhost:4000${profilePic}`;
+  const profilePicUrl = `${process.env.REACT_APP_BACKEND_URL}${profilePic}`;
   const navigate = useNavigate();
   const userRole = sessionStorage.getItem("role");
 
@@ -29,7 +29,7 @@ const Dashboard = () => {
 
   // Initialize Socket.io connection
   useEffect(() => {
-    const socket = io('http://localhost:4000');
+    const socket = io(`${process.env.REACT_APP_BACKEND_URL}`);
 
     socket.on('new_notification', () => {
       setUnreadCount(prevCount => prevCount + 1);
@@ -44,7 +44,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchUserNotification = async () => {
       try {
-        const res = await axios.get('http://localhost:4000/v1/leaves/notify', {
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/v1/leaves/notify`, {
           headers: { 'Authorization': `Bearer ${token}` },
         });
         setUserUnreadCount(res.data.length);
@@ -60,7 +60,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchNotifications = async () => {
       try {
-        const res = await axios.get('http://localhost:4000/v1/leaves/notifications', {
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/v1/leaves/notifications`, {
           headers: { 'Authorization': `Bearer ${token}` },
         });
 
@@ -77,7 +77,7 @@ const Dashboard = () => {
   // Logout Handler
   const handleLogout = async () => {
     try {
-      await axios.post('http://localhost:4000/v1/logout', {}, {
+      await axios.post(`${process.env.REACT_APP_BACKEND_URL}/v1/logout`, {}, {
         headers: { 'Authorization': `Bearer ${token}` },
       });
       sessionStorage.removeItem('token');

@@ -25,7 +25,7 @@ const DisplayItems = () => {
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/v1/items/item_list?page=${currentPage}&limit=${itemsPerPage}`);
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/v1/items/item_list?page=${currentPage}&limit=${itemsPerPage}`);
         setItems(response.data.items);
         setFilteredItems(response.data.items); // Initialize filtered items
         setTotalPages(response.data.totalPages); // Assuming your API returns total pages
@@ -47,7 +47,7 @@ const DisplayItems = () => {
   };
 
   const handleDelete = async (id) => {
-    await axios.delete(`http://localhost:4000/v1/items/deleteItem/${id}`).then(result => {
+    await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/v1/items/deleteItem/${id}`).then(result => {
       if (result.data.Status) {
         window.location.reload();
       }
@@ -171,7 +171,7 @@ const DisplayItems = () => {
               <tr key={item.id}>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <img
-                    src={`http://localhost:4000/uploads/items/${item.image_url}`}
+                    src={`${process.env.REACT_APP_BACKEND_URL}/uploads/items/${item.image_url}`}
                     alt={item.name}
                     className="h-12 w-12 rounded-full object-cover"
                   />

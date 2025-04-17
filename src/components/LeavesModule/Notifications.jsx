@@ -13,13 +13,13 @@ const Notifications = () => {
   // Initialize Socket.io client
  // Fetch and sort notifications on component mount
  useEffect(() => {
-  const socket = io('http://localhost:4000'); // Replace with your server URL
+  const socket = io(`${process.env.REACT_APP_BACKEND_URL}`); // Replace with your server URL
 
   // Function to fetch notifications
   const fetchNotifications = async () => {
     try {
       const token = sessionStorage.getItem('token');
-      const response = await axios.get('http://localhost:4000/v1/leaves/notifications', {
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/v1/leaves/notifications`, {
         headers: {
           'Authorization': `Bearer ${token}`,
         }
@@ -51,7 +51,7 @@ const Notifications = () => {
   const markAsRead = async (id) => {
     try {
       const token = sessionStorage.getItem('token');
-      await axios.put(`http://localhost:4000/v1/leaves/notification/${id}`, {}, {
+      await axios.put(`${process.env.REACT_APP_BACKEND_URL}/v1/leaves/notification/${id}`, {}, {
         headers: {
           'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
         }
@@ -70,7 +70,7 @@ const Notifications = () => {
   const handleDelete = async (id) => {
     try {
       const token = sessionStorage.getItem('token');
-      await axios.delete(`http://localhost:4000/v1/leaves/delete/${id}`, {
+      await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/v1/leaves/delete/${id}`, {
         headers: {
           'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
         }

@@ -39,7 +39,7 @@ const CenterForm = () => {
         }),
         onSubmit: async (values, { resetForm }) => {
             try {
-                const res = await axios.post(`http://localhost:4000/v1/center/create`, values, {
+                const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/v1/center/create`, values, {
                     headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` }
                 });
                 toast.success(res.data.message)

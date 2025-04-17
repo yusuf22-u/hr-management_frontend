@@ -31,7 +31,7 @@ const InventoryForm = () => {
     formData.append('image_url', values.image_url);
 
     try {
-      const response = await axios.post('http://localhost:4000/v1/items/create', formData, {
+      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/v1/items/create`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

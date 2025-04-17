@@ -11,7 +11,7 @@ const ScoreGraph = () => {
     const [currentMonth, setCurrentMonth] = useState("");
 
     useEffect(() => {
-        axios.get("http://localhost:4000/v1/evaluations/scoreDistribution",{
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/v1/evaluations/scoreDistribution`,{
             headers: {
                 'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
             }
