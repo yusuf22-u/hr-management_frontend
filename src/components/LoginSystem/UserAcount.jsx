@@ -15,7 +15,7 @@ const UserAccount = () => {
             Authorization: `Bearer ${sessionStorage.getItem("token")}`,
           },
         });
-        setUser(response.data);
+        setUser(response.data.user);
       } catch (err) {
         console.log("Error fetching user data:", err);
       }
@@ -39,7 +39,7 @@ const UserAccount = () => {
         formData.append("profile", values.profile);
       }
 
-      await axios.put("http://localhost:4000/v1/accountUpdate", formData, {
+      await axios.put(`${process.env.REACT_APP_BACKEND_URL}/v1/accountUpdate`, formData, {
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem("token")}`,
           "Content-Type": "multipart/form-data",
@@ -63,7 +63,7 @@ const UserAccount = () => {
             <h2 className="text-center p-2 text-gray-700 capitalize">My Account</h2>
             <div className="w-24 h-24 mx-auto mb-4">
               <img
-                src={`http://localhost:4000/uploads/userpic/${user.profile}`}
+                src={`${process.env.REACT_APP_BACKEND_URL}/uploads/userpic/${user.profile}`}
                 alt="Profile"
                 className="w-full h-full rounded-full object-cover border-2 border-gray-300"
               />

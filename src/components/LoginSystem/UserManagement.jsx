@@ -28,7 +28,7 @@ const UserManagement = () => {
         try {
             setLoading(true);
             const response = await axios.get(
-                `http://localhost:4000/v1/users?page=${page}&limit=${limit}&sortBy=${sortBy}&order=${order}`,
+                `${process.env.REACT_APP_BACKEND_URL}/v1/users?page=${page}&limit=${limit}&sortBy=${sortBy}&order=${order}`,
                 {
                     headers: {
                         Authorization: `Bearer ${sessionStorage.getItem("token")}`,
@@ -47,7 +47,7 @@ const UserManagement = () => {
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`http://localhost:4000/v1/delete_user/${id}`, {
+            await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/v1/delete_user/${id}`, {
                 headers: {
                     Authorization: `Bearer ${sessionStorage.getItem("token")}`,
                 },

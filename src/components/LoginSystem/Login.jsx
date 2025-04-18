@@ -44,6 +44,7 @@ function LoginForm() {
         sessionStorage.setItem("username", decodedToken.username);
         sessionStorage.setItem("profilePic", decodedToken.profilePic);
         sessionStorage.setItem("userId", decodedToken.userId);
+        sessionStorage.setItem("userId", decodedToken.employee_id);
 
         setTimeout(() => {
           setLoading(false);

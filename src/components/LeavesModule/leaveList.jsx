@@ -57,7 +57,7 @@ const LeaveList = () => {
           <thead className="bg-blue-800 text-white">
             <tr>
               <th className="py-3 px-6 text-left">Employee Name</th> {/* Changed this to Employee Name */}
-              <th className="py-3 px-6 text-left">Leave Type</th>
+              <th className="py-3 px-6 text-left">Request</th>
               <th className="py-3 px-6 text-left">Reason</th>
               <th className="py-3 px-6 text-left">Start Date</th>
               <th className="py-3 px-6 text-left">End Date</th>

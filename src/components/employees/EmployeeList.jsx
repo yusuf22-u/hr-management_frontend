@@ -163,7 +163,7 @@ const EmployeeList = () => {
                                         <td className="px-4 py-3">
                                             <Link to={`/dashboard/employee/certificates/${employee.employee_id}`}>
                                                 <img
-                                                    src={employee.profile_pic}
+                                                    src={`${process.env.REACT_APP_BACKEND_URL}${employee.profile_pic}`}
                                                     alt={employee.full_name}
                                                     className="w-12 h-12 object-cover rounded-full border-2 border-gray-300"
                                                 />

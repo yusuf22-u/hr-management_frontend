@@ -98,7 +98,7 @@ const LeaveRequestForm = () => {
               />
             </div>
             <div className='w-1/2'>
-              <label className="block text-gray-700 font-semibold mb-2">Leave Type</label>
+              <label className="block text-gray-700 font-semibold mb-2">Request</label>
               <select
                 value={leaveType}
                 onChange={(e) => setLeaveType(e.target.value)}
@@ -109,6 +109,8 @@ const LeaveRequestForm = () => {
                 <option value="Vacation">Vacation</option>
                 <option value="Sick Leave">Sick Leave</option>
                 <option value="Maternity Leave">Maternity Leave</option>
+                <option value="study leave">Study Leave</option>
+                <option value="others">Others</option>
               </select>
             </div>
           </div>

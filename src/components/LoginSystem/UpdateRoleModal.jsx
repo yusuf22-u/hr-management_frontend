@@ -8,7 +8,7 @@ const UpdateRoleModal = ({ user, setShowModal, handleUpdateRole, newRole, setNew
                 {/* User Details */}
                 <div className="flex w-1/2 mx-auto flex-col space-y-2 items-center space-x-4 mb-4">
                     <img
-                        src={`http://localhost:4000/uploads/userpic/${user.profile}`}
+                        src={`${process.env.REACT_APP_BACKEND_URL}/uploads/userpic/${user.profile}`}
                         alt={user.username}
                         className="w-12 h-12 rounded-full object-cover"
                     />

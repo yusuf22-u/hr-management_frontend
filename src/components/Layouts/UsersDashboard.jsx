@@ -49,14 +49,14 @@ const UsersDashboard = () => {
               <span className="text-gray-600 mt-2 font-medium">Apply Leave</span>
             </div>
           </Link>
-          <Link to="/dashboard/award/home" className="group">
+          {/* <Link to="/dashboard/award/home" className="group">
             <div className="flex flex-col items-center text-center">
               <div className="bg-green-100 p-4 rounded-full shadow-md group-hover:scale-110 transition transform duration-200">
                 <FaUserGraduate className="text-green-600" size={36} />
               </div>
               <span className="text-gray-600 mt-2 font-medium">Participants</span>
             </div>
-          </Link>
+          </Link> */}
         </div>
 
         {/* Today's Date */}
@@ -81,16 +81,16 @@ const UsersDashboard = () => {
 
       {/* Card Links */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
-        <Link
+        {/* <Link
           to="/dashboard/leave/leave_List"
           className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white p-6 rounded-xl shadow-md hover:scale-105 transform transition flex flex-col items-center justify-center space-y-4"
         >
           <FaBoxOpen className="text-white" size={36} />
           <h2 className="text-lg font-bold">Leave Requests</h2>
           <p className="mt-1">View and manage leave requests</p>
-        </Link>
+        </Link> */}
         <Link
-          to="/dashboard/employee/List"
+          to="/dashboard/users/message"
           className="bg-gradient-to-r from-green-500 to-teal-600 text-white p-6 rounded-xl shadow-md hover:scale-105 transform transition flex flex-col items-center justify-center space-y-4"
         >
           <FaUser className="text-white" size={36} />
@@ -98,12 +98,12 @@ const UsersDashboard = () => {
           <p className="mt-1">Manage employee details</p>
         </Link>
         <Link
-          to="/dashboard/users"
+          to="/dashboard/personal/info"
           className="bg-gradient-to-r from-purple-500 to-pink-600 text-white p-6 rounded-xl shadow-md hover:scale-105 transform transition flex flex-col items-center justify-center space-y-4"
         >
           <FaUserGraduate className="text-white" size={36} />
-          <h2 className="text-lg font-bold">Users</h2>
-          <p className="mt-1">Handle user accounts and access</p>
+          <h2 className="text-lg font-bold">personal information</h2>
+          <p className="mt-1">view your files and personal details</p>
         </Link>
       </div>
     </div>

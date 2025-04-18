@@ -54,6 +54,7 @@ import ParticapantDetail from './components/student/ParticapantDetail';
 import ParticipantList from './components/student/ParticipantList';
 import AdvanceSearch from './components/student/AdvanceSearch';
 import EditParticipant from './components/student/EditParticipant';
+import PersonalDetail from './components/employees/PersonalDetail';
 
 function App() {
   return (
@@ -116,6 +117,7 @@ function App() {
           <Route path='participant/' element={<ParticipantList/>} />
           <Route path='advance/search' element={<AdvanceSearch/>} />
           <Route path='edit_particpant/:id' element={<EditParticipant/>} />
+          <Route path='personal/info' element={<PersonalDetail/>} />
           
 
 
