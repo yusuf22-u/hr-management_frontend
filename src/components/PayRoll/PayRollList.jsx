@@ -6,6 +6,9 @@ import { Link } from 'react-router-dom';
 import { AiFillEdit, AiFillDelete, AiOutlineEye, AiOutlinePlus } from 'react-icons/ai';
 import Modal from '../Model';
 import PayrollForm from './PayrollForm';
+// import { AiOutlineTeam, AiOutlineDollarCircle } from 'react-icons/ai';
+import { MdOutlineAssignment } from 'react-icons/md';
+// import { Link } from 'react-router-dom';
 
 const PayRollList = () => {
     const [payroll, setPayroll] = useState([]);
@@ -16,28 +19,24 @@ const PayRollList = () => {
     const [searchQuery, setSearchQuery] = useState(''); // Search query state
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    // Fetch payroll data
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_BACKEND_URL}/v1/payrolls/payroll_list`, {
-            params: { limit, offset: (page - 1) * limit }
-        }, {
+            params: { limit, offset: (page - 1) * limit },
             headers: {
                 'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
-                withCredentials: true
             },
         })
-            .then((res) => {
-                const { result, totalCount, totalNetSalary } = res.data;
-                setPayroll(result);
-
-                setTotalNumPeople(totalCount);
-                setTotalSalary(Number(totalNetSalary.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })));
-            })
-            .catch((err) => {
-                console.log('Error:', err);
-            });
-    }, [limit, page]); // Re-fetch data when limit or page changes
-
+        .then((res) => {
+            const { result, totalCount, totalNetSalary } = res.data;
+            setPayroll(result);
+            setTotalNumPeople(totalCount);
+            setTotalSalary(Number(totalNetSalary.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })));
+        })
+        .catch((err) => {
+            console.log('Error:', err);
+        });
+    }, [limit, page]);
+    
     const handleDelete = async (id) => {
         if (window.confirm('Are you sure you want to delete this PayRoll?')) {
             try {
@@ -80,28 +79,45 @@ const PayRollList = () => {
                             <h3 className="text-xl font-bold text-gradient-to-r from-orange-400 to-red-400">President International Award</h3>
                         </div>
                     </div>
+                   
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+  {/* Number of People */}
+  <div className="flex items-center bg-white p-4 rounded-xl shadow-md">
+    <div className="w-full text-center">
+      <AiOutlineTeam className="mx-auto text-blue-500 w-10 h-10 mb-2" />
+      <h2 className="text-base font-semibold text-gray-600">Number of People</h2>
+      <p className="text-2xl font-bold text-gray-800 mt-1">
+        {totalNumPeople.toLocaleString('en-US')}
+      </p>
+    </div>
+  </div>
 
-                    {/* Cards for Number of People and Overall Salary */}
-                    <div className="flex space-x-8">
-                        <div className="total flex items-center space-x-2 bg-white p-4 rounded-lg shadow-md">
-                            <div className='flex flex-col space-y-3 items-center'>
-                                <h2 className="text-lg font-semibold text-gray-600">Number of People</h2>
-                                <AiOutlineTeam className="text-blue-500 w-8 h-8" />
-                                <p className="text-xl font-bold text-gray-800">
-                                    {totalNumPeople.toLocaleString('en-US')}
-                                </p>
-                            </div>
-                        </div>
-                        <div className="total flex items-center space-x-2 bg-gradient-to-r from-orange-400 to-red-400 p-4 rounded-lg shadow-md">
-                            <div className='flex flex-col items-center'>
-                                <h2 className="text-lg font-semibold text-white">Overall Salary Total</h2>
-                                <AiOutlineDollarCircle className="text-green-500 w-8 h-8" />
-                                <p className="text-xl font-bold text-gray-800">
-                                    D{totalSalary.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+  {/* Overall Salary Total */}
+  <div className="flex items-center bg-gradient-to-r from-orange-400 to-red-400 p-4 rounded-xl shadow-md">
+    <div className="w-full text-center">
+      <AiOutlineDollarCircle className="mx-auto text-white w-10 h-10 mb-2" />
+      <h2 className="text-base font-semibold text-white">Overall Salary Total</h2>
+      <p className="text-2xl font-bold text-white mt-1">
+        D{totalSalary.toLocaleString('en-US', {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })}
+      </p>
+    </div>
+  </div>
+
+  {/* Nominal Roll Link */}
+  <Link
+    to="/dashboard/payroll/nominalRoll"
+    className="flex items-center bg-white p-4 rounded-xl shadow-md hover:shadow-lg transition"
+  >
+    <div className="w-full text-center">
+      <MdOutlineAssignment className="mx-auto text-purple-600 w-10 h-10 mb-2" />
+      <h2 className="text-base font-semibold text-gray-600">Go to Nominal Roll</h2>
+      <p className="text-sm text-blue-500 font-medium mt-1">View Payroll Worksheet</p>
+    </div>
+  </Link>
+</div>
                 </div>
                 <div className="h1 text-center">
                     <h1>PayRoll list</h1>

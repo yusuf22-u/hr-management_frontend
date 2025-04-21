@@ -58,13 +58,13 @@ const navigate=useNavigate()
                                     <h4 className="text-lg font-semibold text-gray-800 mb-4">{cert.certificate_name}</h4>
                                     <div className="relative">
                                         <img
-                                            src={`${process.env.REACT_APP_BACKEND_URL}/uploads/certificate/${cert.certificate_file}`}
+                                            src={`${cert.certificate_file}`}
                                             alt={cert.certificate_name}
                                             className="w-full h-48 object-cover rounded-md shadow-md"
                                         />
                                         <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-200">
                                             <a
-                                                href={`${process.env.REACT_APP_BACKEND_URL}/uploads/certificate/${cert.certificate_file}`}
+                                                href={`${cert.certificate_file}`}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                                 className="text-white bg-blue-500 px-5 py-2 rounded-lg shadow-md hover:bg-blue-600 transition duration-300">

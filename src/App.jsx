@@ -55,6 +55,7 @@ import ParticipantList from './components/student/ParticipantList';
 import AdvanceSearch from './components/student/AdvanceSearch';
 import EditParticipant from './components/student/EditParticipant';
 import PersonalDetail from './components/employees/PersonalDetail';
+import NominalRoll from './components/PayRoll/NominalRoll';
 
 function App() {
   return (
@@ -97,6 +98,8 @@ function App() {
           <Route path='payroll/add' element={<PayrollForm/>} />
           <Route path='payroll/List' element={<PayRollList/>} />
           <Route path='payroll/singlePayroll/:id' element={<PayrollDetails/>} />
+          <Route path='payroll/nominalRoll' element={<NominalRoll/>} />
+
           <Route path='student_report/:id' element={<StudentReport/>} />
           <Route path='student_Score/:id' element={<StudentScore/>} />
           <Route path='student_Score/grade' element={<StudentGrades/>} />

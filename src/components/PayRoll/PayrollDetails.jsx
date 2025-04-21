@@ -12,12 +12,12 @@ const PayrollDetails = () => {
         const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/v1/payrolls/singlePayroll/${id}`,{
           headers: {
             'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
-            withCredentials: true
+  
           },
         });
         setPayroll(res.data);
       } catch (err) {
-        console.error('Error fetching payroll data:', err);
+        console.error('Error fetching payrolldetail data:', err);
       }
     };
     fetchPayroll();
