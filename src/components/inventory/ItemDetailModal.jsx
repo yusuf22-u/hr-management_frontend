@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import { AiOutlineClose, AiOutlinePrinter, AiOutlineEdit, AiOutlineCalendar, AiOutlineClockCircle } from 'react-icons/ai'; // Importing necessary icons
-import logo from '../../assets/logo.jpeg'
-import logo1 from '../../assets/logo1.png'
+// import logo from '../../assets/logo.jpeg'
+import logo1 from '../../assets/logo.png'
 const ItemDetailModal = () => {
   const [item, setItem] = useState(null);
   const [error, setError] = useState(null);
@@ -71,7 +71,7 @@ const ItemDetailModal = () => {
       <div className="bg-white p-6 rounded-lg shadow-lg max-w-lg w-full">
         <h2 className="text-2xl font-bold text-center mb-4">Item Details</h2>
         <div className="header flex justify-between items-center space-x-2">
-          <img className='w-32 headerlogo  border-none' src={logo} alt="log" />
+          <img className='w-32 headerlogo  border-none' src={logo1} alt="log" />
           <img className='w-16 border-none ' src={logo1} alt="log" />
         </div>
         <div className="text-header pb-4">

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import logo from '../../assets/logo.jpeg'
-import logo1 from '../../assets/logo1.png'
+// import logo from '../../assets/logo.jpeg'
+import logo1 from '../../assets/logo.png'
 
 const ViewParticipant = () => {
     const [participant, setParticipant] = useState([]);
@@ -80,7 +80,7 @@ const ViewParticipant = () => {
                         </button>
                     </div>
                     <div className="header flex justify-between items-center space-x-2">
-                        <img className='w-32 headerlogo  border-none' src={logo} alt="log" />
+                        <img className='w-32 rounded headerlogo  border-none' src={logo1} alt="log" />
                         <img className='w-16 border-none ' src={logo1} alt="log" />
                     </div>
                     <div className="text-header pb-4">

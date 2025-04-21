@@ -3,8 +3,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams, Link } from 'react-router-dom';
-import logo from '../../assets/logo.jpeg'
-import logo1 from '../../assets/logo1.png'
+// import logo from '../../assets/logo.jpeg'
+import logo1 from '../../assets/logo.png'
 
 const StudentReport = () => {
     const { id } = useParams()
@@ -75,7 +75,7 @@ const StudentReport = () => {
             <header className="text-center mb-4">
                 <div className="header flex justify-between items-center space-x-2">
                     <img className="w-16" src={logo1} alt="logo1" />
-                    <img className="w-32" src={logo} alt="logo2" />
+                    <img className="w-32" src={logo1} alt="logo2" />
                 </div>
 
                 <div className="text-header flex flex-col justify-center pb-4">

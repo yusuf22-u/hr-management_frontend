@@ -41,7 +41,10 @@ const EmployeeForm = () => {
       }
       axios.post(`${process.env.REACT_APP_BACKEND_URL}/v1/employees/createEmployee`, formData, {
         headers: {
-          'Content-Type': 'multipart/form-data'
+          'Content-Type': 'multipart/form-data',
+
+          'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
+
         }
       })
         .then(response => {
@@ -67,8 +70,8 @@ const EmployeeForm = () => {
   return (
     <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-3xl mx-auto">
       <div className="flex justify-between items-center space-x-2">
-      <h2 className="text-2xl font-bold mb-4 text-gray-900">Add Employee</h2>
-      <Link to='/dashboard/employee/List' className="bg-gray-300 text-gray-700 py-2 px-4 rounded-lg shadow-md hover:bg-gray-400 transition-all">Back</Link>
+        <h2 className="text-2xl font-bold mb-4 text-gray-900">Add Employee</h2>
+        <Link to='/dashboard/employee/List' className="bg-gray-300 text-gray-700 py-2 px-4 rounded-lg shadow-md hover:bg-gray-400 transition-all">Back</Link>
       </div>
 
       <form onSubmit={formik.handleSubmit} className="space-y-4">

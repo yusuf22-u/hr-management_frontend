@@ -166,7 +166,7 @@ const PayRollList = () => {
                         {filteredPayroll.map((pay, index) => (
                             <tr key={index} className={`hover:bg-gray-100 ${index % 2 === 0 ? 'bg-gray-50' : ''}`}>
                                 <td className="px-4 py-2">
-                                    {pay.profile_pic ? <img src={`${process.env.REACT_APP_BACKEND_URL}/uploads/profile/${pay.profile_pic}`} alt={pay.full_name} className="w-12 h-12 object-cover rounded-full" /> : 'No Image'}
+                                    {pay.profile_pic ? <img src={`${pay.profile_pic}`} alt={pay.full_name} className="w-12 h-12 object-cover rounded-full" /> : 'No Image'}
                                 </td>
                                 <td className="px-4 py-2">{pay.full_name}</td>
                                 <td className="px-4 py-2">D{Number(pay.basic_salary).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>

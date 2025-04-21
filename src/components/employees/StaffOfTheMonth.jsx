@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useRef, useState, useEffect } from "react";
-import logo from '../../assets/logo.jpeg'
-import logo1 from '../../assets/logo1.png'
+// import logo from '../../assets/logo.jpeg'
+import logo1 from '../../assets/logo.png'
 
 const EmployeeCertificate = () => {
     const [staff, setStaff] = useState();
@@ -101,8 +101,8 @@ const EmployeeCertificate = () => {
             <div ref={certificateRef} className="certificate bg-white border-8 border-dash-blue border-blue-500 shadow-lg rounded-lg p-6 sm:p-8 relative print:certificate">
                 {/* Certificate Header */}
                 <div className="flex justify-between mb-6">
-                    <img className='w-16 sm:w-20' src={logo1} alt="Logo" />
-                    <img className='w-32 sm:w-40' src={logo} alt="Logo" />
+                    <img className='w-16 headerlogo rounded-full sm:w-20' src={logo1} alt="Logo" />
+                    <img className='w-16 headerlogo rounded-full sm:w-20' src={logo1} alt="Logo" />
                 </div>
 
                 <div className="text-center mb-6">
@@ -128,7 +128,7 @@ const EmployeeCertificate = () => {
                 {/* Employee Image */}
                 <div className="flex justify-center mt-8 mb-6">
                     <img
-                        src={`${process.env.REACT_APP_BACKEND_URL}/uploads/profile/${staff?.profile_pic}`}
+                        src={`${staff?.profile_pic}`}
                         alt="Employee"
                         className="w-32 sm:w-40 h-32 sm:h-40 rounded-full border-4 border-yellow-500 shadow-md"
                     />

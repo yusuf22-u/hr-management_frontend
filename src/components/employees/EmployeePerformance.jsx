@@ -84,7 +84,7 @@ const EmployeePerformance = () => {
                     <h1 className='text-blue-600 capitalize text-lg'>Employee of the Month</h1>
                     <Link to={'/dashboard/employee/StaffOfMonth/'}>
                         <img
-                            src={`${process.env.REACT_APP_BACKEND_URL}/uploads/profile/${staff?.profile_pic}`}
+                            src={`${staff?.profile_pic}`}
                             alt="Employee"
                             className="w-32 sm:w-40 h-32 sm:h-40 rounded-full border-blue-500 shadow-md"
                         />
@@ -134,7 +134,7 @@ const EmployeePerformance = () => {
                                 <tr key={index} className={`hover:bg-gray-100 transition ${index % 2 === 0 ? 'bg-gray-50' : ''}`}>
                                     <td className="px-4 py-3">
                                         <img
-                                            src={`${process.env.REACT_APP_BACKEND_URL}/uploads/profile/${evals.profile_pic}`}
+                                            src={`${evals.profile_pic}`}
                                             alt={evals.full_name}
                                             className="w-12 h-12 object-cover rounded-full border-2 border-gray-300"
                                         />

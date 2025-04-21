@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import logo from '../../assets/logo.jpeg';
+// import logo from '../../assets/logo.jpeg';
 import logo1 from '../../assets/logo1.png';
 import award from '../../assets/award.png';
 
@@ -49,7 +49,7 @@ const StudentScore = () => {
                 <header className="text-center mb-4">
                     <div className="header flex justify-between items-center">
                         <img className="w-16" src={logo1} alt="logo1" />
-                        <img className="w-32" src={logo} alt="logo2" />
+                        <img className="w-32" src={logo1} alt="logo2" />
                     </div>
 
                     <div className="text-header flex flex-col justify-center pb-4">

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import logo from '../../assets/logo.jpeg'
-import logo1 from '../../assets/logo1.png'
+// import logo from '../../assets/logo.jpeg'
+import logo1 from '../../assets/logo.png'
 import WorkRateDetails from '../WorkRateDetails';
 import { Link, useParams } from 'react-router-dom';
 
@@ -160,8 +160,8 @@ const EvaluationReport = () => {
                         </button>
                     </div>
                     <div className="header flex justify-between items-center space-x-2">
-                        <img className='w-32 headerlogo  border-none' src={logo} alt="log" />
-                        <img className='w-16 border-none ' src={logo1} alt="log" />
+                        <img className='w-16 headerlogo rounded-full  border-none' src={logo1} alt="log" />
+                        <img className='w-16 border-none rounded-full ' src={logo1} alt="log" />
                     </div>
                     <div className="text-header pb-4">
                         <h1 className='text-center'>𝔓𝔯𝔢𝔰𝔦𝔡𝔢𝔫𝔱 ℑ𝔫𝔱𝔢𝔯𝔫𝔞𝔱𝔦𝔬𝔫𝔞𝔩 𝔞𝔴𝔞𝔯𝔡</h1>
@@ -170,7 +170,7 @@ const EvaluationReport = () => {
                     <hr className='px-3' />
                     <div className="profile flex items-center mb-6 space-x-8">
                         <img
-                            src={`${process.env.REACT_APP_BACKEND_URL}/uploads/profile/${evals.profile_pic}`}
+                            src={`${evals.profile_pic}`}
                             alt={evals.full_name}
                             className="w-32 h-32 object-cover mt-4 rounded-full border-4 border-gray-100 mr-6"
                         />

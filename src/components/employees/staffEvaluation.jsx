@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
-
+import { useNavigate } from "react-router-dom"
 const StaffEvaluationForm = () => {
     const [formData, setFormData] = useState({
         employee_id: '',
@@ -19,7 +19,7 @@ const StaffEvaluationForm = () => {
         skills: '',
         comments: ''
     });
-
+    const navigate = useNavigate()
     const [errors, setErrors] = useState({});
 
     const handleChange = (e) => {
@@ -92,6 +92,7 @@ const StaffEvaluationForm = () => {
     return (
         <div className="flex justify-center items-center min-h-[400px] bg-gray-100">
             <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-3xl">
+                <button onClick={() => navigate(-1)} className='bg-blue-500 text-white p-2 rounded-md'>back</button>
                 <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Staff Evaluation Form</h2>
                 <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {/* Employee ID */}
@@ -186,9 +187,9 @@ const StaffEvaluationForm = () => {
                     </div>
                 </form>
             </div>
-            <ToastContainer 
-             position="top-center"
-             className={'text-center'}/>
+            <ToastContainer
+                position="top-center"
+                className={'text-center'} />
         </div>
     );
 };

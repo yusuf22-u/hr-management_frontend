@@ -19,11 +19,15 @@ const EmployeeList = () => {
 
     useEffect(() => {
         setIsLoading(true);
-        axios.get(`${process.env.REACT_APP_BACKEND_URL}/v1/employees/getEmployee?page=${currentPage}&limit=${itemsPerPage}`)
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/v1/employees/getEmployee?page=${currentPage}&limit=${itemsPerPage}`,{
+            headers: {
+                'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
+            }
+        })
             .then(response => {
                 const employeesWithProfilePic = response.data.employees.map(employee => ({
                     ...employee,
-                    profile_pic: employee.profile_pic ? `${process.env.REACT_APP_BACKEND_URL}/uploads/profile/${employee.profile_pic}` : null
+                    profile_pic: employee.profile_pic ? `${employee.profile_pic}` : null
                 }));
                 setEmployees(employeesWithProfilePic);
                 setFilteredEmployees(employeesWithProfilePic); // Populate filteredEmployees as well
@@ -163,7 +167,7 @@ const EmployeeList = () => {
                                         <td className="px-4 py-3">
                                             <Link to={`/dashboard/employee/certificates/${employee.employee_id}`}>
                                                 <img
-                                                    src={`${process.env.REACT_APP_BACKEND_URL}${employee.profile_pic}`}
+                                                    src={employee.profile_pic}
                                                     alt={employee.full_name}
                                                     className="w-12 h-12 object-cover rounded-full border-2 border-gray-300"
                                                 />

@@ -39,7 +39,7 @@ const navigate=useNavigate()
                     <div className="w-full max-w-xs  mt-0 top-0 md:max-w-md bg-gray-50 p-24 rounded-xl shadow-lg flex flex-col space-y-2 items-center">
                     <h3 className="text-xl font-semibold capitalize text-gray-800">EmployeeID:{" "}{employee.employee_id}</h3>
                         <img
-                            src={`${process.env.REACT_APP_BACKEND_URL}/uploads/profile/${employee.profile_pic}`}
+                            src={`${employee.profile_pic}`}
                             alt="Employee Profile"
                             className="w-32 h-32 rounded-full object-cover border-4 border-gray-300 mb-4"
                         />

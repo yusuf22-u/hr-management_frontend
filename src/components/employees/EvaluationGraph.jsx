@@ -12,13 +12,14 @@ import {
     Legend,
     Colors,
 } from "chart.js";
-
+import { useNavigate } from "react-router-dom"
 // Register Chart.js components
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const EvaluationGraph = () => {
     const [data, setData] = useState(null); // Ensure initial value is null
     const { id } = useParams();
+    const navigate=useNavigate()
 
     useEffect(() => {
         const fetchingData = async () => {
@@ -123,10 +124,12 @@ const EvaluationGraph = () => {
         <>
         <div className="flex lg:h-full flex-col sm:flex-row justify-between bg-white p-4 sm:p-6 rounded-lg shadow-md space-y-4 sm:space-y-0 sm:space-x-6">
             {/* Left section: Employee Details */}
+           
             <div className="flex lg:ml-8 flex-col lg:items-center items-center space-y-1 lg:justify-center sm:items-start text-center sm:text-left">
+            <button onClick={() => navigate(-1)} className='bg-blue-500 text-white p-2 rounded-md'>back</button>
                 <h1 className="text-gray-600 text-xl sm:text-2xl font-semibold capitalize">Employee</h1>
                 <img
-                    src={`${process.env.REACT_APP_BACKEND_URL}/uploads/profile/${data.profile_pic}`}
+                    src={`${data.profile_pic}`}
                     alt="Employee"
                     className="w-32 sm:w-40 h-32 sm:h-40 rounded-full border-4  shadow-lg mb-4"
                 />

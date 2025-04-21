@@ -63,7 +63,7 @@ const UserAccount = () => {
             <h2 className="text-center p-2 text-gray-700 capitalize">My Account</h2>
             <div className="w-24 h-24 mx-auto mb-4">
               <img
-                src={`${process.env.REACT_APP_BACKEND_URL}/uploads/userpic/${user.profile}`}
+                src={`${user.profile}`}
                 alt="Profile"
                 className="w-full h-full rounded-full object-cover border-2 border-gray-300"
               />

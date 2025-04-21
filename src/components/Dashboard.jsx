@@ -13,7 +13,7 @@ const Dashboard = () => {
   const token = sessionStorage.getItem('token');
   const username = sessionStorage.getItem('username');
   const profilePic = sessionStorage.getItem('profilePic');
-  const profilePicUrl = `${process.env.REACT_APP_BACKEND_URL}${profilePic}`;
+  const profilePicUrl = `${profilePic}`;
   const navigate = useNavigate();
   const userRole = sessionStorage.getItem("role");
 

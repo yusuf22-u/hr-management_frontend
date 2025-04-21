@@ -3,15 +3,32 @@ import axios from "axios";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { ToastContainer, toast } from 'react-toastify';
-const AddCertificateForm = ({ employeeId }) => {
-    const [message, setMessage] = useState("");
+import { useNavigate } from "react-router-dom";
 
-    // Validation schema using Yup
+const AddCertificateForm = ({ employeeId }) => {
+    const navigate = useNavigate()
+    const[error, setError]=useState('')
+
     const validationSchema = Yup.object().shape({
         employee_id: Yup.string().required("Employee ID is required"),
         certificate_name: Yup.string().required("Certificate name is required"),
-        certificate_files: Yup.mixed().required("At least one certificate file is required"),
+        certificate_files: Yup.mixed()
+            .required("At least one certificate file is required")
+            .test(
+                "is-image",
+                "Only image files (JPG, JPEG, PNG) are allowed",
+                (value) => {
+                    if (!value || value.length === 0) return false;
+                    for (let i = 0; i < value.length; i++) {
+                        if (!["image/jpeg", "image/jpg", "image/png"].includes(value[i].type)) {
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+            ),
     });
+    
 
     const handleSubmit = async (values, { setSubmitting, resetForm }) => {
         const formData = new FormData();
@@ -24,25 +41,29 @@ const AddCertificateForm = ({ employeeId }) => {
         }
 
         try {
-            const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/v1/certificates/addCertificates`, formData, {
-                headers: { "Content-Type": "multipart/form-data" },
+            const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/v1/certificates/upload_certificate`, formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                    'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
+                },
             });
             toast.success(res.data.message)
             // setMessage(res.data.message);
             resetForm();
+            setError('')
         } catch (error) {
-            // setMessage("Error adding certificates");
-            toast.warning('Error deleting certificate', error.response?.data?.error || 'Something went wrong');
-        
-            console.log('erro',error)
+           
+            const errorMessage = error.response?.data?.error || "Something went wrong!";
+            setError(errorMessage);  // 
         }
         setSubmitting(false);
     };
 
     return (
         <div className="p-4 bg-white shadow-md rounded-lg">
-            <h2 className="text-xl font-bold mb-4">Upload Certificates</h2>
-            {message && <p className="text-green-500">{message}</p>}
+            <button onClick={()=>navigate(-1)} className="bg-blue-500 text-white p-2 rounded-md">back</button>
+            <h2 className="text-xl font-bold mb-4 text-center">Upload Certificates</h2>
+            {error && <p className="text-red-500 text-center">{error}</p>}
             <Formik
                 initialValues={{
                     employee_id: employeeId || "",
@@ -79,7 +100,7 @@ const AddCertificateForm = ({ employeeId }) => {
                         <input
                             type="file"
                             multiple
-                            accept=".pdf,.jpg,.png"
+                            accept=".pdf,.jpeg.jpg,.png,.docx"
                             onChange={(event) => setFieldValue("certificate_files", event.currentTarget.files)}
                             className="w-full p-2 border rounded"
                         />
@@ -96,12 +117,12 @@ const AddCertificateForm = ({ employeeId }) => {
                     </Form>
                 )}
             </Formik>
-            <ToastContainer 
-             position="top-center"
-             className={'text-center'}/>
-       </div>
+            <ToastContainer
+                position="top-center"
+                className={'text-center'} />
+        </div>
 
-     
+
     );
 };
 
