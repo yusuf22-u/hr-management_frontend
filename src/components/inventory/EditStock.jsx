@@ -7,19 +7,22 @@ import * as Yup from 'yup';
 const EditStock = () => {
     const navigate = useNavigate();
     const [serverError, setServerError] = useState('');
-    const [items, setItems] = useState(null); // Initialize as null to handle loading state
+    const [items, setItems] = useState(null); // Handle loading state
     const { id } = useParams();
 
     // Fetch item data when the component mounts
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_BACKEND_URL}/v1/stocks/single_items/${id}`)
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/v1/stocks/single_items/${id}`,{
+            headers: {
+                'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
+            },
+        })
             .then(response => {
-                const { item_id, transactions_type, quantity } = response.data;
+                const { item_number, transactions_type, quantity } = response.data; // <<< item_number!
                 setItems({
-                    item_id,
+                    item_number,
                     transactions_type,
                     quantity
-
                 });
             })
             .catch(error => {
@@ -27,7 +30,6 @@ const EditStock = () => {
             });
     }, [id]);
 
-    // Render loading message if item data is not yet loaded
     if (!items) {
         return <div>Loading...</div>;
     }
@@ -36,33 +38,38 @@ const EditStock = () => {
         <Formik
             enableReinitialize
             initialValues={{
-                item_id: items?.item_id || '',
+                item_number: items?.item_number || '',
                 transactions_type: items?.transactions_type || '',
                 quantity: items?.quantity || '',
-
             }}
             validationSchema={Yup.object({
-                item_id: Yup.string().required('Item Number is required'),
-                transactions_type: Yup.string().required('transactions type is required'),
-                quantity: Yup.number().min(1, 'Quantity must be at least 1').required('Quantity is required'),
-
+                item_number: Yup.string().required('Item Number is required'), // <<< correct field
+                transactions_type: Yup.string().required('Transaction type is required'),
+                quantity: Yup.number()
+                    .min(1, 'Quantity must be at least 1')
+                    .required('Quantity is required'),
             })}
             onSubmit={async (values, { setSubmitting }) => {
                 try {
-
-                    const response = await axios.put(`${process.env.REACT_APP_BACKEND_URL}/v1/stocks/update_items/${id}`, values);
-
+                    await axios.put(
+                        `${process.env.REACT_APP_BACKEND_URL}/v1/stocks/update_items/${id}`,
+                        values,
+                        {
+                            headers: {
+                                'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
+                            },
+                        }
+                    );
                     navigate('/dashboard/stocks/stock_list');
                 } catch (error) {
                     setServerError(error.response?.data?.error || 'An unexpected error occurred');
                     console.error('Error updating item:', error);
-
                 } finally {
-                    setSubmitting(false); // Ensure the form submission is marked complete
+                    setSubmitting(false);
                 }
             }}
         >
-            {({ isSubmitting, setFieldValue }) => (
+            {({ isSubmitting }) => (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
                     <div className="bg-white rounded-lg shadow-lg p-6">
                         <Link to='/dashboard/stocks/stock_list' className="text-red-600 hover:text-red-800">
@@ -75,22 +82,21 @@ const EditStock = () => {
 
                             <div className="flex justify-between space-x-2">
                                 <div className="mb-4 w-1/2">
-                                    <label className="block text-sm font-medium text-gray-700">Item Id</label>
+                                    <label className="block text-sm font-medium text-gray-700">Item Number</label>
                                     <Field
                                         type="text"
-                                        name="item_id"
+                                        name="item_number"
                                         className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
                                     />
-                                    <ErrorMessage name="item_id" component="div" className="text-red-600 text-sm" />
+                                    <ErrorMessage name="item_number" component="div" className="text-red-600 text-sm" />
                                 </div>
 
                                 <div className="mb-4 w-1/2">
-                                    <label className="block text-sm font-medium text-gray-700">transactions type</label>
+                                    <label className="block text-sm font-medium text-gray-700">Transaction Type</label>
                                     <Field as="select" name="transactions_type" className="mt-1 block w-full p-2 border border-gray-300 rounded-md">
-                                        <option value="">Select transactions type </option>
-                                        <option value="stock-in">stock-in</option>
-                                        <option value="stock-out">stock-out</option>
-
+                                        <option value="">Select transaction type</option>
+                                        <option value="stock-in">Stock-In</option>
+                                        <option value="stock-out">Stock-Out</option>
                                     </Field>
                                     <ErrorMessage name="transactions_type" component="div" className="text-red-600 text-sm" />
                                 </div>
@@ -106,18 +112,16 @@ const EditStock = () => {
                                 <ErrorMessage name="quantity" component="div" className="text-red-600 text-sm" />
                             </div>
 
-
                             <button
                                 type="submit"
                                 disabled={isSubmitting}
-                                className="bg-blue-500 text-white py-2 px-4 rounded-lg"
+                                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                             >
-                                {isSubmitting ? 'Updating...' : 'Update stocks'}
+                                {isSubmitting ? 'Updating...' : 'Update Stock'}
                             </button>
                         </Form>
                     </div>
                 </div>
-
             )}
         </Formik>
     );

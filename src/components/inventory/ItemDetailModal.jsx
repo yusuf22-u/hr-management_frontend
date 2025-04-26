@@ -14,6 +14,7 @@ const ItemDetailModal = () => {
       try {
         const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/v1/stocks/single_items/${id}`);
         setItem(response.data);
+        console.log('itemmm', response.data)
       } catch (error) {
         setError('Failed to fetch item details.');
       }
@@ -27,6 +28,9 @@ const ItemDetailModal = () => {
       <html>
         <head>
           <title>Print Item Details</title>
+           <link rel="stylesheet" href="../src/index.css">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+                
           <style>
             body { font-family: Arial, sans-serif; }
             .print-container { padding: 20px; }
@@ -40,8 +44,9 @@ const ItemDetailModal = () => {
         <body>
           <div class="print-container">
             <div class="item-header">
-              <img src="${process.env.REACT_APP_BACKEND_URL}/uploads/items/${item.item_pic}" alt="${item.item_name}" />
+              <img src="${item.item_image_url}" alt="${item.item_name}" />
               <h2>${item.item_name}</h2>
+              <h2>(${item.item_number})</h2>
             </div>
             <div class="item-details">
               <p><strong>Description:</strong> ${item.description}</p>
@@ -71,8 +76,8 @@ const ItemDetailModal = () => {
       <div className="bg-white p-6 rounded-lg shadow-lg max-w-lg w-full">
         <h2 className="text-2xl font-bold text-center mb-4">Item Details</h2>
         <div className="header flex justify-between items-center space-x-2">
-          <img className='w-32 headerlogo  border-none' src={logo1} alt="log" />
-          <img className='w-16 border-none ' src={logo1} alt="log" />
+          <img className='w-16 rounded-full headerlogo  border-none' src={logo1} alt="log" />
+          <img className='w-16 border-none rounded-full ' src={logo1} alt="log" />
         </div>
         <div className="text-header pb-4">
           <h1 className='text-center'>𝔓𝔯𝔢𝔰𝔦𝔡𝔢𝔫𝔱 ℑ𝔫𝔱𝔢𝔯𝔫𝔞𝔱𝔦𝔬𝔫𝔞𝔩 𝔞𝔴𝔞𝔯𝔡</h1>
@@ -81,18 +86,21 @@ const ItemDetailModal = () => {
         <div className="py-4 px-2 w-full mx-auto">
           <div className="header w-full text-center">
             <img
-              src={`${process.env.REACT_APP_BACKEND_URL}/uploads/items/${item.item_pic}`}
+              src={`${item.item_image_url}`}
               alt={item.name}
               className="w-32 h-32  mx-auto mb-4 "
             />
             <h3 className="text-xl font-bold mt-4 capitalize">
               {item.item_name}
             </h3>
+            <h3 className=" text-gray-700 italic mt-4 capitalize">
+              ({item.item_number})
+            </h3>
           </div>
           <hr className="my-4" />
           <p className="text-gray-700 mt-2 text-center">
             {/* <AiOutlineInfoCircle className="inline-block mr-2" /> */}
-            Description: {item.description}
+            {item.description}
           </p>
           <hr className="my-4" />
 

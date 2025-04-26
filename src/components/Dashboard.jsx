@@ -188,7 +188,7 @@ const Dashboard = () => {
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col">
         <header className="bg-white text-blue-900 shadow-lg p-4 flex items-center justify-between">
-          <Link to={'/dashboard/'} className="text-xl ml-24 font-bold">Award Management System</Link>
+          <Link to={'/dashboard/'} className="text-xl ml-24 font-bold">HR Management System</Link>
           <div className="flex items-center space-x-4">
             {(userRole === 'award' || userRole === 'user') && (
               <div className="relative">

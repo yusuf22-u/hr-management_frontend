@@ -7,20 +7,24 @@ import * as Yup from 'yup';
 const EditItems = () => {
     const navigate = useNavigate();
     const [serverError, setServerError] = useState('');
-    const [items, setItems] = useState(null); // Initialize as null to handle loading state
+    const [items, setItems] = useState(null);
     const { id } = useParams();
 
-    // Fetch item data when the component mounts
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_BACKEND_URL}/v1/items/getItem/${id}`)
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/v1/items/getItem/${id}`, {
+            headers: {
+                'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
+            },
+        })
             .then(response => {
-                const { name, category, quantity, description, image_url } = response.data;
+                const { name, physical_location, amount, acquisition_date, description, image_url } = response.data;
                 setItems({
                     name,
-                    category,
-                    quantity,
+                    physical_location,
+                    amount,
+                    acquisition_date: acquisition_date ? acquisition_date.split('T')[0] : '', // Format date
                     description,
-                    image_url
+                    image_url,
                 });
             })
             .catch(error => {
@@ -28,7 +32,6 @@ const EditItems = () => {
             });
     }, [id]);
 
-    // Render loading message if item data is not yet loaded
     if (!items) {
         return <div>Loading...</div>;
     }
@@ -38,17 +41,20 @@ const EditItems = () => {
             enableReinitialize
             initialValues={{
                 name: items?.name || '',
-                category: items?.category || '',
-                quantity: items?.quantity || '',
+                physical_location: items?.physical_location || '',
+                amount: items?.amount || '',
+                acquisition_date: items?.acquisition_date || '',
                 description: items?.description || '',
-                image_url: null, // Initialize file as null
+                image_url: null, 
             }}
             validationSchema={Yup.object({
                 name: Yup.string().required('Item name is required'),
-                category: Yup.string().required('Category is required'),
-                quantity: Yup.number().min(1, 'Quantity must be at least 1').required('Quantity is required'),
+                physical_location: Yup.string().required('Physical location is required'),
+                amount: Yup.number().min(1, 'Amount must be at least 1').required('Amount is required'),
+                acquisition_date: Yup.date().required('Acquisition date is required'),
                 description: Yup.string().required('Description is required'),
-                image_url: Yup.mixed().required(null)
+                image_url: Yup.mixed()
+                    .nullable()
                     .test('fileSize', 'File too large', value => !value || (value && value.size <= 5 * 1024 * 1024))
                     .test('fileFormat', 'Only jpg, jpeg, and png files are allowed', value =>
                         !value || (value && ['image/jpeg', 'image/png', 'image/jpg'].includes(value.type))
@@ -57,18 +63,17 @@ const EditItems = () => {
             onSubmit={async (values, { setSubmitting }) => {
                 try {
                     const formData = new FormData();
-
-                    // Append each value, including handling the file
                     Object.keys(values).forEach(key => {
                         if (key === 'image_url' && values.image_url) {
-                            formData.append(key, values.image_url);  // Only append new file if it exists
+                            formData.append(key, values.image_url);
                         } else {
                             formData.append(key, values[key]);
                         }
                     });
 
-                    await axios.put(`${process.env.REACT_APP_BACKEND_URL}/v1/items//update_item/${id}`, formData, {
+                    await axios.put(`${process.env.REACT_APP_BACKEND_URL}/v1/items/update_item/${id}`, formData, {
                         headers: {
+                            'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
                             'Content-Type': 'multipart/form-data',
                         },
                     });
@@ -78,7 +83,7 @@ const EditItems = () => {
                     setServerError('An unexpected error occurred');
                     console.error('Error updating item:', error);
                 } finally {
-                    setSubmitting(false); // Ensure the form submission is marked complete
+                    setSubmitting(false);
                 }
             }}
         >
@@ -105,24 +110,34 @@ const EditItems = () => {
                                 </div>
 
                                 <div className="mb-4 w-1/2">
-                                    <label className="block text-sm font-medium text-gray-700">Category</label>
+                                    <label className="block text-sm font-medium text-gray-700">Physical Location</label>
                                     <Field
                                         type="text"
-                                        name="category"
+                                        name="physical_location"
                                         className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
                                     />
-                                    <ErrorMessage name="category" component="div" className="text-red-600 text-sm" />
+                                    <ErrorMessage name="physical_location" component="div" className="text-red-600 text-sm" />
                                 </div>
                             </div>
 
                             <div className="mb-4">
-                                <label className="block text-sm font-medium text-gray-700">Quantity</label>
+                                <label className="block text-sm font-medium text-gray-700">Amount</label>
                                 <Field
                                     type="number"
-                                    name="quantity"
+                                    name="amount"
                                     className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
                                 />
-                                <ErrorMessage name="quantity" component="div" className="text-red-600 text-sm" />
+                                <ErrorMessage name="amount" component="div" className="text-red-600 text-sm" />
+                            </div>
+
+                            <div className="mb-4">
+                                <label className="block text-sm font-medium text-gray-700">Acquisition Date</label>
+                                <Field
+                                    type="date"
+                                    name="acquisition_date"
+                                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+                                />
+                                <ErrorMessage name="acquisition_date" component="div" className="text-red-600 text-sm" />
                             </div>
 
                             <div className="mb-4">
@@ -159,7 +174,6 @@ const EditItems = () => {
                         </Form>
                     </div>
                 </div>
-
             )}
         </Formik>
     );

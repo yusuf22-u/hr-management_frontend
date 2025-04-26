@@ -2,32 +2,34 @@ import React, { useState } from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-const StockForm = ({onClose}) => {
+const StockForm = ({ onClose }) => {
     const [serverError, setServerError] = useState('');
     const navigate = useNavigate();
 
-    // Validation schema
+    // Updated Validation schema
     const validationSchema = Yup.object({
-        item_id: Yup.string().required('Item ID is required'),
-        transactions_type: Yup.string().required('transactions type is required'),
+        item_number: Yup.string().required('Item Number is required'),
+        transactions_type: Yup.string().required('Transaction type is required'),
         quantity: Yup.number()
             .min(1, 'Quantity must be at least 1')
             .required('Quantity is required'),
     });
 
     // Form submission
-    const handleSubmit = async (values, { setSubmitting, setFieldError }) => {
+    const handleSubmit = async (values, { setSubmitting }) => {
         setSubmitting(true);
         setServerError('');
 
         try {
-            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/v1/stocks/create_stock`, values);
-            onClose()
-             navigate('/dashboard/stocks/stock_list');
-            
-
+            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/v1/stocks/create_stock`, values,{
+                headers: {
+                    'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
+                },
+            });
+            onClose();
+            navigate('/dashboard/stocks/stock_list');
         } catch (error) {
             if (error.response && error.response.data) {
                 setServerError(error.response.data.error);
@@ -40,11 +42,9 @@ const StockForm = ({onClose}) => {
     };
 
     return (
-
-
         <Formik
             initialValues={{
-                item_id: '',
+                item_number: '',
                 transactions_type: '',
                 quantity: '',
             }}
@@ -59,22 +59,22 @@ const StockForm = ({onClose}) => {
 
                     <div className="flex justify-between space-x-2">
                         <div className="mb-4 w-1/2">
-                            <label className="block text-sm font-medium text-gray-700">Item ID</label>
+                            <label className="block text-sm font-medium text-gray-700">Item Number</label>
                             <Field
                                 type="text"
-                                name="item_id"
+                                name="item_number"
                                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+                                placeholder="Enter Item Number"
                             />
-                            <ErrorMessage name="item_id" component="div" className="text-red-600 text-sm" />
+                            <ErrorMessage name="item_number" component="div" className="text-red-600 text-sm" />
                         </div>
 
                         <div className="mb-4 w-1/2">
-                            <label className="block text-sm font-medium text-gray-700">transactions type</label>
+                            <label className="block text-sm font-medium text-gray-700">Transaction Type</label>
                             <Field as="select" name="transactions_type" className="mt-1 block w-full p-2 border border-gray-300 rounded-md">
-                                <option value="">Select transactions type </option>
-                                <option value="stock-in">stock-in</option>
-                                <option value="stock-out">stock-out</option>
-
+                                <option value="">Select transaction type</option>
+                                <option value="stock-in">Stock In</option>
+                                <option value="stock-out">Stock Out</option>
                             </Field>
                             <ErrorMessage name="transactions_type" component="div" className="text-red-600 text-sm" />
                         </div>
@@ -86,6 +86,7 @@ const StockForm = ({onClose}) => {
                             type="number"
                             name="quantity"
                             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+                            placeholder="Enter Quantity"
                         />
                         <ErrorMessage name="quantity" component="div" className="text-red-600 text-sm" />
                     </div>
@@ -93,14 +94,13 @@ const StockForm = ({onClose}) => {
                     <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="bg-blue-500 text-white py-2 px-4 rounded-lg"
+                        className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg w-full transition duration-300"
                     >
                         {isSubmitting ? 'Allocating...' : 'Allocate Item'}
                     </button>
                 </Form>
             )}
         </Formik>
-
     );
 };
 

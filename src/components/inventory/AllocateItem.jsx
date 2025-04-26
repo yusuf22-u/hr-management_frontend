@@ -10,7 +10,7 @@ const AllocateItemForm = () => {
 
   // Validation schema
   const validationSchema = Yup.object({
-    item_id: Yup.string().required('Item ID is required'),
+    item_number: Yup.string().required('Item Number is required'),
     staff_id: Yup.string().required('Staff ID is required'),
     quantity: Yup.number()
       .min(1, 'Quantity must be at least 1')
@@ -18,14 +18,16 @@ const AllocateItemForm = () => {
   });
 
   // Form submission
-  const handleSubmit = async (values, { setSubmitting, setFieldError }) => {
+  const handleSubmit = async (values, { setSubmitting }) => {
     setSubmitting(true);
     setServerError('');
 
     try {
-      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/v1/allocateItem/allocate`, values);
+      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/v1/allocateItem/allocate`, values,{
+        headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}`, },
+      });
       console.log(response.data);
-      navigate('/dashboard/items/list');
+      navigate('/dashboard/items/allocate_list');
     } catch (error) {
       if (error.response && error.response.data) {
         setServerError(error.response.data.error);
@@ -46,7 +48,7 @@ const AllocateItemForm = () => {
 
         <Formik
           initialValues={{
-            item_id: '',
+            item_number: '',
             staff_id: '',
             quantity: '',
           }}
@@ -61,13 +63,13 @@ const AllocateItemForm = () => {
 
               <div className="flex justify-between space-x-2">
                 <div className="mb-4 w-1/2">
-                  <label className="block text-sm font-medium text-gray-700">Item ID</label>
+                  <label className="block text-sm font-medium text-gray-700">Item Number</label>
                   <Field
                     type="text"
-                    name="item_id"
+                    name="item_number"
                     className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
                   />
-                  <ErrorMessage name="item_id" component="div" className="text-red-600 text-sm" />
+                  <ErrorMessage name="item_number" component="div" className="text-red-600 text-sm" />
                 </div>
 
                 <div className="mb-4 w-1/2">
