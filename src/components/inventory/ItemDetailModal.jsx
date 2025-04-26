@@ -12,9 +12,11 @@ const ItemDetailModal = () => {
   useEffect(() => {
     const fetchItemDetails = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/v1/stocks/single_items/${id}`);
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/v1/stocks/single_items/${id}`,{
+          headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` },
+        });
         setItem(response.data);
-        console.log('itemmm', response.data)
+        // console.log('itemmm', response.data)
       } catch (error) {
         setError('Failed to fetch item details.');
       }
